@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.chris.fitnessapplication.MainActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.TabLayout
+
+            android:layout_width="385dp"
+            android:layout_height="34dp"
+
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp"
+            android:id="@+id/FitnessTabs">
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/Tab_Biceps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/biceps" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tab_Legs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="legs" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tab_Back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/back" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tab_Abs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/abs" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tab_Calf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/calf" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tab_Chest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/chest" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tab_Forearm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/forearms" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tab_Shoulder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/shoulders" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tab_Triceps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/triceps" />
+
+        </android.support.design.widget.TabLayout>
+
+        <ListView
+            android:id="@+id/ExersizeList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/FitnessTabs"
+            android:layout_marginBottom="50dp"
+            android:scrollbars="vertical" />
+
+        <Button
+            android:id="@+id/btn_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="Profile" />
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

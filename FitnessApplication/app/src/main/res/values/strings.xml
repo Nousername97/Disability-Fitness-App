@@ -1,7 +1,10 @@
 <resources>
-    <string name="app_name">FitnessApplication</string>
+    <string name="app_name">Fitness Application</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
     <string name="biceps">Biceps</string>
-    <string name="legs">Legs</string>
     <string name="back">Back</string>
     <string name="abs">Abs</string>
     <string name="calf">calf</string>

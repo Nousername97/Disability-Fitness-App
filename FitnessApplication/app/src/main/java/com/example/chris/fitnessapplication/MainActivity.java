@@ -1,39 +1,77 @@
 package com.example.chris.fitnessapplication;
 
-import android.app.LauncherActivity;
-import android.support.design.widget.TabItem;
-import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TableLayout;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    private ListView ExersizeList ;
-    private ArrayAdapter<String> listAdapter ;
+
+    private TextView mTextMessage;
+    private Button btnProfile;
+    private Button btnHome;
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    mTextMessage.setText(R.string.title_home);
+                    return true;
+                case R.id.navigation_dashboard:
+                    mTextMessage.setText(R.string.title_dashboard);
+                    return true;
+                case R.id.navigation_notifications:
+                    mTextMessage.setText(R.string.title_notifications);
+                    return true;
+            }
+            return false;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ExersizeList = (ListView) findViewById(R.id.ExersizeList);
-        String[] bicepsArray = new String[] {"Dumbbell Curl", "Hammer Curl", "Kneeling Single arm Curl",
-                "Cable bicep Curls", "Stability ball Dumbell Bicep curl seated",
-                "Test line 1", "Test line 2", "Test line 3", "Test line 4", "Test line 5",
-                "Test Line 6", "Test line 7", "Test line 8", "Test line 9", "Test line 10" };
-        ArrayList<String> exersizeList = new ArrayList<String>();
-        exersizeList.addAll(Arrays.asList(bicepsArray));
-        listAdapter = new ArrayAdapter<String>(MainActivity.this, R.layout.simplerow, exersizeList);
-        ExersizeList.setAdapter( listAdapter );
 
+        mTextMessage = (TextView) findViewById(R.id.message);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        onHomePageButtonClick();
+        onProfileButtonClick();
     }
 
+    public void onProfileButtonClick() {
 
+        btnProfile = (Button)findViewById(R.id.btn_profile);
+        btnProfile.setOnClickListener(
+                new View.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent i = new Intent(MainActivity.this, Profile.class);
+                        startActivity(i);
+                    }
+                }
+        );
+    }
+
+    public void onHomePageButtonClick() {
+
+        btnHome = (Button)findViewById(R.id.btn_homepage);
+        btnHome.setOnClickListener(
+                new View.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent i = new Intent(MainActivity.this, HomePage.class);
+                        startActivity(i);
+                    }
+                }
+        );
+    }
 }
