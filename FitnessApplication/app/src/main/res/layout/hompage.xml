@@ -19,7 +19,7 @@
             android:id="@+id/FitnessTabs">
 
             <android.support.design.widget.TabItem
-                android:id="@+id/Tab_Biceps"
+                android:id="@+id/tab_Biceps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/biceps" />
