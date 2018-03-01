@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class HomePage extends AppCompatActivity /*implements OnClickListener*/ {
+public class HomePage extends AppCompatActivity implements OnClickListener {
     private ListView ExersizeList ;
     private ArrayAdapter<String> listAdapter ;
     private TabLayout tabSelected;
@@ -42,7 +42,7 @@ public class HomePage extends AppCompatActivity /*implements OnClickListener*/ {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hompage);
         exersizeList();
-        /*TabItem biceps = (TabItem)findViewById(R.id.tab_Biceps);
+        TabItem biceps = (TabItem)findViewById(R.id.tab_Biceps);
         TabItem legs = (TabItem)findViewById(R.id.tab_Legs);
         TabItem back = (TabItem)findViewById(R.id.tab_Back);
         TabItem abs = (TabItem)findViewById(R.id.tab_Abs);
@@ -59,7 +59,7 @@ public class HomePage extends AppCompatActivity /*implements OnClickListener*/ {
         chest.setOnClickListener(this);
         forearm.setOnClickListener(this);
         shoulder.setOnClickListener(this);
-        tricep.setOnClickListener(this);*/
+        tricep.setOnClickListener(this);
         onProfileButtonClick();
     }
 
@@ -94,7 +94,7 @@ public class HomePage extends AppCompatActivity /*implements OnClickListener*/ {
         );
     }
 
-    /*@Override
+    @Override
     public void onClick(View v) {
         int targetId = v.getId();
         if (targetId == R.id.tab_Biceps){
@@ -127,5 +127,5 @@ public class HomePage extends AppCompatActivity /*implements OnClickListener*/ {
         else{
             currentArray = currentArray;
         }
-    }*/
+    }
 }
