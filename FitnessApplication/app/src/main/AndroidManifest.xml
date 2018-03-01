@@ -25,6 +25,7 @@
             android:name=".HomePage">
             android:label="@string/app_name">
         </activity>
+        <activity android:name=".exersizeTemplate" />
 
     </application>
 
