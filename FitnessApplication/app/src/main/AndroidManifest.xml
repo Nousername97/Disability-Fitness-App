@@ -26,14 +26,6 @@
             android:label="@string/app_name">
         </activity>
         <activity android:name=".exersizeTemplate" />
-        <activity android:name=".legsList" />
-        <activity android:name=".absList"/>
-        <activity android:name=".backList"/>
-        <activity android:name=".calfList"/>
-        <activity android:name=".chestList"/>
-        <activity android:name=".forearmList"/>
-        <activity android:name=".shoulderList"/>
-        <activity android:name=".tricepList"/>
 
     </application>
 

@@ -34,17 +34,17 @@ public class HomePage extends AppCompatActivity {
     private Button bicepsButton;
     private Button chestButton;
     private Button forearmButton;
-    String [] currentArray = new String[] {"Error Fetching List", "Null"};
+    String [] currentArray = new String[]{};
     String[] bicepsArray = new String[] {"Dumbbell Curl", "Hammer Curl", "Kneeling Single arm Curl",
-                                        "Cable bicep Curls", "Stability ball Dumbell Bicep curl seated"};
-    String[] legsArray = new String[] {"leg content line 1", "Leg content line 2"};
-    String[] backArray = new String[] {"back content line 1", "back content line 2"};
-    String[] absArray = new String[] {"abs content line 1", "abs content line 2"};
-    String[] calfArray = new String[] {"calf content line 1", "calf content line 2"};
-    String[] chestArray = new String[] {"chest content line 1", "chest content line 2"};
-    String[] forearmArray = new String[] {"forearm content line 1", "forearm content line 2"};
-    String[] shoulderArray = new String[] {"Shoulder content line 1", "Shoulder content line 2"};
-    String[] tricepsArray = new String[] {"Tricpes content line 1", "Triceps content line 2"};
+            "Cable bicep Curls", "Stability ball Dumbell Bicep curl seated"};//populate each of these arrays with the appropriate database content
+    String[] legsArray = new String[] {"leg content line 1", "Leg content line 2"};//populate each of these arrays with the appropriate database content
+    String[] backArray = new String[] {"back content line 1", "back content line 2"};//populate each of these arrays with the appropriate database content
+    String[] absArray = new String[] {"abs content line 1", "abs content line 2"};//populate each of these arrays with the appropriate database content
+    String[] calfArray = new String[] {"calf content line 1", "calf content line 2"};//populate each of these arrays with the appropriate database content
+    String[] chestArray = new String[] {"chest content line 1", "chest content line 2"};//populate each of these arrays with the appropriate database content
+    String[] forearmArray = new String[] {"forearm content line 1", "forearm content line 2"};//populate each of these arrays with the appropriate database content
+    String[] shoulderArray = new String[] {"Shoulder content line 1", "Shoulder content line 2"};//populate each of these arrays with the appropriate database content
+    String[] tricepsArray = new String[] {"Tricpes content line 1", "Triceps content line 2"};//populate each of these arrays with the appropriate database content
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +59,8 @@ public class HomePage extends AppCompatActivity {
         onButtonForearmClick();
         onButtonShoulderClick();
         onButtonTricepsClick();
-
+        onButtonBicepsClick();
+        currentArray = bicepsArray;
     }
 
 
@@ -67,7 +68,7 @@ public class HomePage extends AppCompatActivity {
     public void exersizeList() {
         ExersizeList = findViewById(R.id.ExersizeList);
         ArrayList<String> exersizeList = new ArrayList<String>();
-        exersizeList.addAll(Arrays.asList(bicepsArray));
+        exersizeList.addAll(Arrays.asList(currentArray));
         listAdapter = new ArrayAdapter<String>(HomePage.this, R.layout.simplerow, exersizeList);
         listAdapter.notifyDataSetChanged();
         ExersizeList.setAdapter( listAdapter );
@@ -93,14 +94,36 @@ public class HomePage extends AppCompatActivity {
         );
     }
 
+    public void onButtonBicepsClick(){
+        bicepsButton = findViewById(R.id.btn_biceps);
+        bicepsButton.setOnClickListener(
+                new OnClickListener() {
+                    @Override
+                    public void onClick(View chest) {
+                        listAdapter.clear();
+                        currentArray = bicepsArray;
+                        ArrayList<String> exersizeList = new ArrayList<String>();
+                        exersizeList.addAll(Arrays.asList(currentArray));
+                        listAdapter = new ArrayAdapter<String>(HomePage.this, R.layout.simplerow, exersizeList);
+                        listAdapter.notifyDataSetChanged();
+                        ExersizeList.setAdapter(listAdapter);
+                    }
+                }
+        );
+    }
     public void onButtonLegsClick(){
         legsButton = findViewById(R.id.btn_legs);
         legsButton.setOnClickListener(
                 new OnClickListener() {
                     @Override
                     public void onClick(View legs) {
-                        Intent L = new Intent(HomePage.this, legsList.class);
-                        startActivity(L);
+                        listAdapter.clear();
+                        currentArray = legsArray;
+                        ArrayList<String> exersizeList = new ArrayList<String>();
+                        exersizeList.addAll(Arrays.asList(currentArray));
+                        listAdapter = new ArrayAdapter<String>(HomePage.this, R.layout.simplerow, exersizeList);
+                        listAdapter.notifyDataSetChanged();
+                        ExersizeList.setAdapter(listAdapter);
                     }
                 }
         );
@@ -112,8 +135,13 @@ public class HomePage extends AppCompatActivity {
                 new OnClickListener() {
                     @Override
                     public void onClick(View abs) {
-                        Intent A = new Intent(HomePage.this, absList.class);
-                        startActivity(A);
+                        listAdapter.clear();
+                        currentArray = absArray;
+                        ArrayList<String> exersizeList = new ArrayList<String>();
+                        exersizeList.addAll(Arrays.asList(currentArray));
+                        listAdapter = new ArrayAdapter<String>(HomePage.this, R.layout.simplerow, exersizeList);
+                        listAdapter.notifyDataSetChanged();
+                        ExersizeList.setAdapter(listAdapter);
                     }
                 }
         );
@@ -124,8 +152,13 @@ public class HomePage extends AppCompatActivity {
                 new OnClickListener() {
                     @Override
                     public void onClick(View chest) {
-                        Intent CH = new Intent(HomePage.this, chestList.class);
-                        startActivity(CH);
+                        listAdapter.clear();
+                        currentArray = chestArray;
+                        ArrayList<String> exersizeList = new ArrayList<String>();
+                        exersizeList.addAll(Arrays.asList(currentArray));
+                        listAdapter = new ArrayAdapter<String>(HomePage.this, R.layout.simplerow, exersizeList);
+                        listAdapter.notifyDataSetChanged();
+                        ExersizeList.setAdapter(listAdapter);
                     }
                 }
         );
@@ -136,8 +169,13 @@ public class HomePage extends AppCompatActivity {
                 new OnClickListener() {
                     @Override
                     public void onClick(View calf) {
-                        Intent CA = new Intent(HomePage.this, calfList.class);
-                        startActivity(CA);
+                        listAdapter.clear();
+                        currentArray = calfArray;
+                        ArrayList<String> exersizeList = new ArrayList<String>();
+                        exersizeList.addAll(Arrays.asList(currentArray));
+                        listAdapter = new ArrayAdapter<String>(HomePage.this, R.layout.simplerow, exersizeList);
+                        listAdapter.notifyDataSetChanged();
+                        ExersizeList.setAdapter(listAdapter);
                     }
                 }
         );
@@ -148,8 +186,13 @@ public class HomePage extends AppCompatActivity {
                 new OnClickListener() {
                     @Override
                     public void onClick(View back) {
-                        Intent B = new Intent(HomePage.this, backList.class);
-                        startActivity(B);
+                        listAdapter.clear();
+                        currentArray = backArray;
+                        ArrayList<String> exersizeList = new ArrayList<String>();
+                        exersizeList.addAll(Arrays.asList(currentArray));
+                        listAdapter = new ArrayAdapter<String>(HomePage.this, R.layout.simplerow, exersizeList);
+                        listAdapter.notifyDataSetChanged();
+                        ExersizeList.setAdapter(listAdapter);
                     }
                 }
         );
@@ -160,8 +203,13 @@ public class HomePage extends AppCompatActivity {
                 new OnClickListener() {
                     @Override
                     public void onClick(View tricep) {
-                        Intent T = new Intent(HomePage.this, tricepList.class);
-                        startActivity(T);
+                        listAdapter.clear();
+                        currentArray = tricepsArray;
+                        ArrayList<String> exersizeList = new ArrayList<String>();
+                        exersizeList.addAll(Arrays.asList(currentArray));
+                        listAdapter = new ArrayAdapter<String>(HomePage.this, R.layout.simplerow, exersizeList);
+                        listAdapter.notifyDataSetChanged();
+                        ExersizeList.setAdapter(listAdapter);
                     }
                 }
         );
@@ -172,8 +220,13 @@ public class HomePage extends AppCompatActivity {
                 new OnClickListener() {
                     @Override
                     public void onClick(View forearm) {
-                        Intent F = new Intent(HomePage.this, forearmList.class);
-                        startActivity(F);
+                        listAdapter.clear();
+                        currentArray = forearmArray;
+                        ArrayList<String> exersizeList = new ArrayList<String>();
+                        exersizeList.addAll(Arrays.asList(currentArray));
+                        listAdapter = new ArrayAdapter<String>(HomePage.this, R.layout.simplerow, exersizeList);
+                        listAdapter.notifyDataSetChanged();
+                        ExersizeList.setAdapter(listAdapter);
                     }
                 }
         );
@@ -184,8 +237,13 @@ public class HomePage extends AppCompatActivity {
                 new OnClickListener() {
                     @Override
                     public void onClick(View shoulder) {
-                        Intent S = new Intent(HomePage.this, shoulderList.class);
-                        startActivity(S);
+                        listAdapter.clear();
+                        currentArray = shoulderArray;
+                        ArrayList<String> exersizeList = new ArrayList<String>();
+                        exersizeList.addAll(Arrays.asList(currentArray));
+                        listAdapter = new ArrayAdapter<String>(HomePage.this, R.layout.simplerow, exersizeList);
+                        listAdapter.notifyDataSetChanged();
+                        ExersizeList.setAdapter(listAdapter);
                     }
                 }
         );
