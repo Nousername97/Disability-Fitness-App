@@ -11,7 +11,7 @@ public class ExercisePopulateDatabase {
     public static ExercisesDetails[] populateData() {
         Log.d("prepopulate", "Running");
         return new ExercisesDetails[] {
-                new ExercisesDetails("DDumbbell Curl", "1 Arm Dumb Bell Curl", "\\exercises\\triceps\\One Arm Dumb-bell Curl\\picture.png", "\\exercises\\triceps\\One Arm Dumb-bell Curl\\instructions.pngg")
+                new ExercisesDetails("Dumbbell Curl", "1 Arm Dumb Bell Curl", "\\exercises\\triceps\\One Arm Dumb-bell Curl\\picture.png", "\\exercises\\triceps\\One Arm Dumb-bell Curl\\instructions.pngg")
         };
     }
 }
