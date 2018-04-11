@@ -10,6 +10,12 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
     buildTypes {
         release {
@@ -20,7 +26,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -28,4 +34,21 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    // ViewModel and LiveData
+    implementation 'android.arch.lifecycle:extensions:1.1.0'
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.0"
+    // Room
+    implementation 'android.arch.persistence.room:runtime:1.1.0-alpha3'
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.0-alpha3"
+    // ViewModel and LiveData
+    implementation 'android.arch.lifecycle:extensions:1.1.0'
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.0"
+    // Room
+    implementation 'android.arch.persistence.room:runtime:1.1.0-alpha3'
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.0-alpha3"
+    // Test helpers for LiveData
+    testImplementation 'android.arch.core:core-testing:1.1.0'
+    // Test helpers for Room
+    testImplementation 'android.arch.persistence.room:testing:1.1.0-alpha3'
+    implementation files('C:/Users/Invigorant/Dropbox/Computer Science/Team Pro/Disability-Fitness-App-master/Disability-Fitness-App-master/FitnessApplication/.idea/libraries/javax.inject-1.jar')
 }
