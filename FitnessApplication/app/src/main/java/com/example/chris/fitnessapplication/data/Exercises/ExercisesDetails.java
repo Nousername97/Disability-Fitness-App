@@ -14,17 +14,17 @@ public class ExercisesDetails {
     @ColumnInfo(name =  "name")
     private String name;
 
-    @ColumnInfo(name = "grouping" )@NonNull
+    @ColumnInfo(name = "grouping" )
     private  String grouping;
 
     @ColumnInfo(name =  "exerciseImagePath")
-    private String exerciseImagePath;
+    private int exerciseImagePath;
 
     @ColumnInfo(name =  "instructionsImagePath")
     private String instructionsImagePath;
 
     //Initializer to add new users
-    public ExercisesDetails (String exerciseID, String name, String exerciseImagePath, String instructionsImagePath, String grouping)
+    public ExercisesDetails (String exerciseID, String name, int exerciseImagePath, String instructionsImagePath, String grouping)
     {
         this.exerciseID = exerciseID;
         this.name = name;
@@ -49,8 +49,8 @@ public class ExercisesDetails {
         return name;
     }
 
-    public void setExerciseImagePath(String exerciseImagePath) { this.exerciseImagePath = exerciseImagePath; }
-    public String getExerciseImagePath() { return exerciseImagePath; }
+    public void setExerciseImagePath(int exerciseImagePath) { this.exerciseImagePath = exerciseImagePath; }
+    public int getExerciseImagePath() { return exerciseImagePath; }
 
     public void setInstructionsImagePath(String instructionsImagePath) { this.instructionsImagePath = instructionsImagePath; }
     public String getInstructionsImagePath() {

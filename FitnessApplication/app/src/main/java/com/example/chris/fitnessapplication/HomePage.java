@@ -73,6 +73,7 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent x = new Intent(HomePage.this, exersizeTemplate.class);
+                x.putExtra("ExerciseClicked", ExersizeList.getItemAtPosition(i).toString());
                 startActivity(x);
             }
         });

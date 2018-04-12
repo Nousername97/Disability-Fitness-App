@@ -19,6 +19,9 @@ public interface ExercisesDetailsDao {
     @Query("SELECT * FROM ExercisesDetails WHERE exerciseID = :exerciseID")
     ExercisesDetails getExerciseById(String exerciseID);
 
+    @Query("SELECT * FROM ExercisesDetails WHERE name = :name")
+    ExercisesDetails getExerciseByName(String name);
+
     @Query("SELECT * FROM ExercisesDetails WHERE grouping = :grouping")
     List<ExercisesDetails> getExercisesByGroup(String grouping);
 

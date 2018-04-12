@@ -1,12 +1,12 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 4,
-    "identityHash": "ed523ddc9aadc9e7664574f61b2a3172",
+    "version": 6,
+    "identityHash": "2d594df3abac0d24deee87571fde861e",
     "entities": [
       {
         "tableName": "ExercisesDetails",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`exerciseID` TEXT NOT NULL, `name` TEXT, `grouping` TEXT, `exerciseImagePath` TEXT, `instructionsImagePath` TEXT, PRIMARY KEY(`exerciseID`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`exerciseID` TEXT NOT NULL, `name` TEXT, `grouping` TEXT, `exerciseImagePath` INTEGER NOT NULL, `instructionsImagePath` TEXT, PRIMARY KEY(`exerciseID`))",
         "fields": [
           {
             "fieldPath": "exerciseID",
@@ -29,8 +29,8 @@
           {
             "fieldPath": "exerciseImagePath",
             "columnName": "exerciseImagePath",
-            "affinity": "TEXT",
-            "notNull": false
+            "affinity": "INTEGER",
+            "notNull": true
           },
           {
             "fieldPath": "instructionsImagePath",
@@ -51,7 +51,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"ed523ddc9aadc9e7664574f61b2a3172\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"2d594df3abac0d24deee87571fde861e\")"
     ]
   }
 }

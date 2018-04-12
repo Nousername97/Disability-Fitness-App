@@ -11,7 +11,7 @@ import android.util.Log;
 import java.util.concurrent.Executors;
 
 
-@Database(entities = {ExercisesDetails.class}, version = 4)
+@Database(entities = {ExercisesDetails.class}, version = 6)
 public abstract class ExerciseDetailsDatabase extends RoomDatabase {
 
     private static volatile ExerciseDetailsDatabase instance;
