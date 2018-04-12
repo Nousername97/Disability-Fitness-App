@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class HomePage extends AppCompatActivity {
+public class absList extends AppCompatActivity {
     private ListView ExersizeList ;
     private ArrayAdapter<String> listAdapter ;
     private Button profileBtn;
@@ -36,7 +36,7 @@ public class HomePage extends AppCompatActivity {
     private Button forearmButton;
     String [] currentArray = new String[] {"Error Fetching List", "Null"};
     String[] bicepsArray = new String[] {"Dumbbell Curl", "Hammer Curl", "Kneeling Single arm Curl",
-                                        "Cable bicep Curls", "Stability ball Dumbell Bicep curl seated"};
+            "Cable bicep Curls", "Stability ball Dumbell Bicep curl seated"};
     String[] legsArray = new String[] {"leg content line 1", "Leg content line 2"};
     String[] backArray = new String[] {"back content line 1", "back content line 2"};
     String[] absArray = new String[] {"abs content line 1", "abs content line 2"};
@@ -52,14 +52,13 @@ public class HomePage extends AppCompatActivity {
         exersizeList();
         onProfileButtonClick();
         onButtonLegsClick();
-        onButtonAbsClick();
         onButtonBackClick();
+        onButtonBicepsClick();
         onButtonCalfClick();
         onButtonChestClick();
         onButtonForearmClick();
         onButtonShoulderClick();
         onButtonTricepsClick();
-
     }
 
 
@@ -67,14 +66,14 @@ public class HomePage extends AppCompatActivity {
     public void exersizeList() {
         ExersizeList = findViewById(R.id.ExersizeList);
         ArrayList<String> exersizeList = new ArrayList<String>();
-        exersizeList.addAll(Arrays.asList(bicepsArray));
-        listAdapter = new ArrayAdapter<String>(HomePage.this, R.layout.simplerow, exersizeList);
+        exersizeList.addAll(Arrays.asList(absArray));
+        listAdapter = new ArrayAdapter<String>(absList.this, R.layout.simplerow, exersizeList);
         listAdapter.notifyDataSetChanged();
         ExersizeList.setAdapter( listAdapter );
         ExersizeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent x = new Intent(HomePage.this, exersizeTemplate.class);
+                Intent x = new Intent(absList.this, exersizeTemplate.class);
                 startActivity(x);
             }
         });
@@ -86,8 +85,20 @@ public class HomePage extends AppCompatActivity {
         profileBtn.setOnClickListener(
                 new OnClickListener() {
                     public void onClick(View v) {
-                        Intent i = new Intent(HomePage.this, Profile.class);
+                        Intent i = new Intent(absList.this, Profile.class);
                         startActivity(i);
+                    }
+                }
+        );
+    }
+    public void onButtonBicepsClick(){
+        bicepsButton = findViewById(R.id.btn_biceps);
+        bicepsButton.setOnClickListener(
+                new OnClickListener() {
+                    @Override
+                    public void onClick(View legs) {
+                        Intent L = new Intent(absList.this, HomePage.class);
+                        startActivity(L);
                     }
                 }
         );
@@ -99,32 +110,20 @@ public class HomePage extends AppCompatActivity {
                 new OnClickListener() {
                     @Override
                     public void onClick(View legs) {
-                        Intent L = new Intent(HomePage.this, legsList.class);
+                        Intent L = new Intent(absList.this, legsList.class);
                         startActivity(L);
                     }
                 }
         );
     }
 
-    public void onButtonAbsClick(){
-        absButton = findViewById(R.id.btn_abs);
-        absButton.setOnClickListener(
-                new OnClickListener() {
-                    @Override
-                    public void onClick(View abs) {
-                        Intent A = new Intent(HomePage.this, absList.class);
-                        startActivity(A);
-                    }
-                }
-        );
-    }
     public void onButtonChestClick(){
         chestButton = findViewById(R.id.btn_chest);
         chestButton.setOnClickListener(
                 new OnClickListener() {
                     @Override
                     public void onClick(View chest) {
-                        Intent CH = new Intent(HomePage.this, chestList.class);
+                        Intent CH = new Intent(absList.this, chestList.class);
                         startActivity(CH);
                     }
                 }
@@ -136,7 +135,7 @@ public class HomePage extends AppCompatActivity {
                 new OnClickListener() {
                     @Override
                     public void onClick(View calf) {
-                        Intent CA = new Intent(HomePage.this, calfList.class);
+                        Intent CA = new Intent(absList.this, calfList.class);
                         startActivity(CA);
                     }
                 }
@@ -148,7 +147,7 @@ public class HomePage extends AppCompatActivity {
                 new OnClickListener() {
                     @Override
                     public void onClick(View back) {
-                        Intent B = new Intent(HomePage.this, backList.class);
+                        Intent B = new Intent(absList.this, backList.class);
                         startActivity(B);
                     }
                 }
@@ -160,7 +159,7 @@ public class HomePage extends AppCompatActivity {
                 new OnClickListener() {
                     @Override
                     public void onClick(View tricep) {
-                        Intent T = new Intent(HomePage.this, tricepList.class);
+                        Intent T = new Intent(absList.this, tricepList.class);
                         startActivity(T);
                     }
                 }
@@ -172,7 +171,7 @@ public class HomePage extends AppCompatActivity {
                 new OnClickListener() {
                     @Override
                     public void onClick(View forearm) {
-                        Intent F = new Intent(HomePage.this, forearmList.class);
+                        Intent F = new Intent(absList.this, forearmList.class);
                         startActivity(F);
                     }
                 }
@@ -184,7 +183,7 @@ public class HomePage extends AppCompatActivity {
                 new OnClickListener() {
                     @Override
                     public void onClick(View shoulder) {
-                        Intent S = new Intent(HomePage.this, shoulderList.class);
+                        Intent S = new Intent(absList.this, shoulderList.class);
                         startActivity(S);
                     }
                 }

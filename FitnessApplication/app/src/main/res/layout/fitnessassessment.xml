@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="48dp"
+            android:contentDescription=""
+            app:srcCompat="@drawable/polygonmodel" />
+
+        <Button
+            android:id="@+id/btn_head"
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="39dp"
+            android:background="@android:color/transparent"
+            android:visibility="visible"
+            tools:layout_editor_absoluteX="169dp"
+            tools:layout_editor_absoluteY="39dp" />
+
+        <Button
+            android:id="@+id/btn_torso"
+            android:layout_width="70dp"
+            android:layout_height="113dp"
+            android:layout_below="@+id/btn_head"
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/transparent"
+            tools:layout_editor_absoluteX="157dp"
+            tools:layout_editor_absoluteY="111dp" />
+
+        <Button
+            android:id="@+id/btn_rightarm"
+            android:layout_width="72dp"
+            android:layout_height="160dp"
+            android:layout_alignBottom="@+id/btn_torso"
+            android:layout_toEndOf="@+id/btn_torso"
+            android:layout_toRightOf="@+id/btn_torso"
+            android:background="@android:color/transparent"
+            android:rotation="345"
+            tools:layout_editor_absoluteX="229dp"
+            tools:layout_editor_absoluteY="94dp" />
+
+        <Button
+            android:id="@+id/btn_leftarm"
+            android:layout_width="72dp"
+            android:layout_height="160dp"
+            android:layout_alignBottom="@+id/btn_torso"
+            android:layout_toLeftOf="@+id/btn_torso"
+            android:layout_toStartOf="@+id/btn_torso"
+            android:background="@android:color/transparent"
+            android:rotation="15"
+            tools:layout_editor_absoluteX="83dp"
+            tools:layout_editor_absoluteY="94dp" />
+
+        <Button
+            android:id="@+id/btn_legs"
+            android:layout_width="wrap_content"
+            android:layout_height="192dp"
+            android:layout_below="@+id/btn_torso"
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/transparent"
+            tools:layout_editor_absoluteX="148dp"
+            tools:layout_editor_absoluteY="232dp" />
+
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
     private Button btnProfile;
     private Button btnHome;
+    private Button btnAssess;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         onHomePageButtonClick();
         onProfileButtonClick();
+        onAssessButtonClick();
     }
 
     public void onProfileButtonClick() {
@@ -71,6 +73,20 @@ public class MainActivity extends AppCompatActivity {
                         Intent i = new Intent(MainActivity.this, HomePage.class);
                         startActivity(i);
                     }
+                }
+        );
+    }
+
+    public void onAssessButtonClick() {
+
+        btnAssess = (Button)findViewById(R.id.btn_assess);
+        btnAssess.setOnClickListener(
+                new View.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent i = new Intent(MainActivity.this, fitnessAssessment.class);
+                        startActivity(i);
+                    }
+
                 }
         );
     }
