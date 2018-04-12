@@ -11,5 +11,7 @@ public class exersizeTemplate extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exersizetemplate);
+
+
     }
 }

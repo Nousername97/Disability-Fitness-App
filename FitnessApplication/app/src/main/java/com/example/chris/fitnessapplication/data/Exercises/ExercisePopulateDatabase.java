@@ -8,10 +8,8 @@ import android.util.Log;
 
 public class ExercisePopulateDatabase {
 
-    public static ExercisesDetails[] populateData() {
+    public static ExercisesDetails populateData() {
         Log.d("prepopulate", "Running");
-        return new ExercisesDetails[] {
-                new ExercisesDetails("Dumbbell Curl", "1 Arm Dumb Bell Curl", "\\exercises\\triceps\\One Arm Dumb-bell Curl\\picture.png", "\\exercises\\triceps\\One Arm Dumb-bell Curl\\instructions.pngg")
-        };
+        return new ExercisesDetails("Dumbbell Curl", "2 Arm Dumb Bell Curl", "\\exercises\\triceps\\One Arm Dumb-bell Curl\\picture.png", "\\exercises\\triceps\\One Arm Dumb-bell Curl\\instructions.png", "biceps");
     }
 }

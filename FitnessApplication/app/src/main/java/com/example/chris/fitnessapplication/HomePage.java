@@ -17,8 +17,13 @@ import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.Toast;
 
+import com.example.chris.fitnessapplication.data.Exercises.ExerciseDetailsDatabase;
+import com.example.chris.fitnessapplication.data.Exercises.ExercisePopulateDatabase;
+import com.example.chris.fitnessapplication.data.Exercises.ExercisesDetails;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 public class HomePage extends AppCompatActivity {
@@ -34,17 +39,10 @@ public class HomePage extends AppCompatActivity {
     private Button bicepsButton;
     private Button chestButton;
     private Button forearmButton;
+
+    private
     String [] currentArray = new String[]{};
-    String[] bicepsArray = new String[] {"Dumbbell Curl", "Hammer Curl", "Kneeling Single arm Curl",
-            "Cable bicep Curls", "Stability ball Dumbell Bicep curl seated"};//populate each of these arrays with the appropriate database content
-    String[] legsArray = new String[] {"leg content line 1", "Leg content line 2"};//populate each of these arrays with the appropriate database content
-    String[] backArray = new String[] {"back content line 1", "back content line 2"};//populate each of these arrays with the appropriate database content
-    String[] absArray = new String[] {"abs content line 1", "abs content line 2"};//populate each of these arrays with the appropriate database content
-    String[] calfArray = new String[] {"calf content line 1", "calf content line 2"};//populate each of these arrays with the appropriate database content
-    String[] chestArray = new String[] {"chest content line 1", "chest content line 2"};//populate each of these arrays with the appropriate database content
-    String[] forearmArray = new String[] {"forearm content line 1", "forearm content line 2"};//populate each of these arrays with the appropriate database content
-    String[] shoulderArray = new String[] {"Shoulder content line 1", "Shoulder content line 2"};//populate each of these arrays with the appropriate database content
-    String[] tricepsArray = new String[] {"Tricpes content line 1", "Triceps content line 2"};//populate each of these arrays with the appropriate database content
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,15 +58,14 @@ public class HomePage extends AppCompatActivity {
         onButtonShoulderClick();
         onButtonTricepsClick();
         onButtonBicepsClick();
-        currentArray = bicepsArray;
     }
 
 
 
     public void exersizeList() {
         ExersizeList = findViewById(R.id.ExersizeList);
-        ArrayList<String> exersizeList = new ArrayList<String>();
-        exersizeList.addAll(Arrays.asList(currentArray));
+        List<String> exersizeList = new ArrayList<String>();
+        exersizeList = populateList("biceps");
         listAdapter = new ArrayAdapter<String>(HomePage.this, R.layout.simplerow, exersizeList);
         listAdapter.notifyDataSetChanged();
         ExersizeList.setAdapter( listAdapter );
@@ -101,9 +98,8 @@ public class HomePage extends AppCompatActivity {
                     @Override
                     public void onClick(View chest) {
                         listAdapter.clear();
-                        currentArray = bicepsArray;
-                        ArrayList<String> exersizeList = new ArrayList<String>();
-                        exersizeList.addAll(Arrays.asList(currentArray));
+                        List<String> exersizeList = new ArrayList<String>();
+                        exersizeList = populateList("biceps");
                         listAdapter = new ArrayAdapter<String>(HomePage.this, R.layout.simplerow, exersizeList);
                         listAdapter.notifyDataSetChanged();
                         ExersizeList.setAdapter(listAdapter);
@@ -118,9 +114,8 @@ public class HomePage extends AppCompatActivity {
                     @Override
                     public void onClick(View legs) {
                         listAdapter.clear();
-                        currentArray = legsArray;
-                        ArrayList<String> exersizeList = new ArrayList<String>();
-                        exersizeList.addAll(Arrays.asList(currentArray));
+                        List<String> exersizeList = new ArrayList<String>();
+                        exersizeList = populateList("legs");
                         listAdapter = new ArrayAdapter<String>(HomePage.this, R.layout.simplerow, exersizeList);
                         listAdapter.notifyDataSetChanged();
                         ExersizeList.setAdapter(listAdapter);
@@ -136,9 +131,8 @@ public class HomePage extends AppCompatActivity {
                     @Override
                     public void onClick(View abs) {
                         listAdapter.clear();
-                        currentArray = absArray;
-                        ArrayList<String> exersizeList = new ArrayList<String>();
-                        exersizeList.addAll(Arrays.asList(currentArray));
+                        List<String> exersizeList = new ArrayList<String>();
+                        exersizeList = populateList("abs");
                         listAdapter = new ArrayAdapter<String>(HomePage.this, R.layout.simplerow, exersizeList);
                         listAdapter.notifyDataSetChanged();
                         ExersizeList.setAdapter(listAdapter);
@@ -153,9 +147,8 @@ public class HomePage extends AppCompatActivity {
                     @Override
                     public void onClick(View chest) {
                         listAdapter.clear();
-                        currentArray = chestArray;
-                        ArrayList<String> exersizeList = new ArrayList<String>();
-                        exersizeList.addAll(Arrays.asList(currentArray));
+                        List<String> exersizeList = new ArrayList<String>();
+                        exersizeList = populateList("chest");
                         listAdapter = new ArrayAdapter<String>(HomePage.this, R.layout.simplerow, exersizeList);
                         listAdapter.notifyDataSetChanged();
                         ExersizeList.setAdapter(listAdapter);
@@ -170,9 +163,8 @@ public class HomePage extends AppCompatActivity {
                     @Override
                     public void onClick(View calf) {
                         listAdapter.clear();
-                        currentArray = calfArray;
-                        ArrayList<String> exersizeList = new ArrayList<String>();
-                        exersizeList.addAll(Arrays.asList(currentArray));
+                        List<String> exersizeList = new ArrayList<String>();
+                        exersizeList = populateList("calf");
                         listAdapter = new ArrayAdapter<String>(HomePage.this, R.layout.simplerow, exersizeList);
                         listAdapter.notifyDataSetChanged();
                         ExersizeList.setAdapter(listAdapter);
@@ -187,9 +179,8 @@ public class HomePage extends AppCompatActivity {
                     @Override
                     public void onClick(View back) {
                         listAdapter.clear();
-                        currentArray = backArray;
-                        ArrayList<String> exersizeList = new ArrayList<String>();
-                        exersizeList.addAll(Arrays.asList(currentArray));
+                        List<String> exersizeList = new ArrayList<String>();
+                        exersizeList = populateList("back");
                         listAdapter = new ArrayAdapter<String>(HomePage.this, R.layout.simplerow, exersizeList);
                         listAdapter.notifyDataSetChanged();
                         ExersizeList.setAdapter(listAdapter);
@@ -204,9 +195,8 @@ public class HomePage extends AppCompatActivity {
                     @Override
                     public void onClick(View tricep) {
                         listAdapter.clear();
-                        currentArray = tricepsArray;
-                        ArrayList<String> exersizeList = new ArrayList<String>();
-                        exersizeList.addAll(Arrays.asList(currentArray));
+                        List<String> exersizeList = new ArrayList<String>();
+                        exersizeList = populateList("triceps");
                         listAdapter = new ArrayAdapter<String>(HomePage.this, R.layout.simplerow, exersizeList);
                         listAdapter.notifyDataSetChanged();
                         ExersizeList.setAdapter(listAdapter);
@@ -221,9 +211,8 @@ public class HomePage extends AppCompatActivity {
                     @Override
                     public void onClick(View forearm) {
                         listAdapter.clear();
-                        currentArray = forearmArray;
-                        ArrayList<String> exersizeList = new ArrayList<String>();
-                        exersizeList.addAll(Arrays.asList(currentArray));
+                        List<String> exersizeList = new ArrayList<String>();
+                        exersizeList = populateList("forearm");
                         listAdapter = new ArrayAdapter<String>(HomePage.this, R.layout.simplerow, exersizeList);
                         listAdapter.notifyDataSetChanged();
                         ExersizeList.setAdapter(listAdapter);
@@ -238,9 +227,8 @@ public class HomePage extends AppCompatActivity {
                     @Override
                     public void onClick(View shoulder) {
                         listAdapter.clear();
-                        currentArray = shoulderArray;
-                        ArrayList<String> exersizeList = new ArrayList<String>();
-                        exersizeList.addAll(Arrays.asList(currentArray));
+                        List<String> exersizeList = new ArrayList<String>();
+                        exersizeList = populateList("shoulder");
                         listAdapter = new ArrayAdapter<String>(HomePage.this, R.layout.simplerow, exersizeList);
                         listAdapter.notifyDataSetChanged();
                         ExersizeList.setAdapter(listAdapter);
@@ -249,4 +237,18 @@ public class HomePage extends AppCompatActivity {
         );
     }
 
+    public List<String> populateList(String group)
+    {
+        ExerciseDetailsDatabase.getInstance(this).exercisesDetailsDao().insertNewExercise(ExercisePopulateDatabase.populateData());
+
+        List<String> listToBeFilled = new ArrayList<String>();
+        List<ExercisesDetails> currentExercise = ExerciseDetailsDatabase.getInstance(this).exercisesDetailsDao().getExercisesByGroup(group);
+
+        for ( ExercisesDetails temp: currentExercise)
+        {
+            listToBeFilled.add(temp.getName());
+        }
+
+        return  listToBeFilled;
+    }
 }

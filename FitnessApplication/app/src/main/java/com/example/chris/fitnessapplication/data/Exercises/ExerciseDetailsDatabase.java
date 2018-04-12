@@ -11,7 +11,7 @@ import android.util.Log;
 import java.util.concurrent.Executors;
 
 
-@Database(entities = {ExercisesDetails.class}, version = 2)
+@Database(entities = {ExercisesDetails.class}, version = 4)
 public abstract class ExerciseDetailsDatabase extends RoomDatabase {
 
     private static volatile ExerciseDetailsDatabase instance;
@@ -40,7 +40,7 @@ public abstract class ExerciseDetailsDatabase extends RoomDatabase {
                     Executors.newSingleThreadScheduledExecutor().execute(new Runnable() {
                         @Override
                         public void run() {
-                            getInstance(context).exercisesDetailsDao().insertAll(ExercisePopulateDatabase.populateData());
+                            getInstance(context).exercisesDetailsDao().insertNewExercise(ExercisePopulateDatabase.populateData());
                         }
                     });
              }

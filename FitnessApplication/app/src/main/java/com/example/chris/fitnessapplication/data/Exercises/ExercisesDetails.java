@@ -14,6 +14,9 @@ public class ExercisesDetails {
     @ColumnInfo(name =  "name")
     private String name;
 
+    @ColumnInfo(name = "grouping" )@NonNull
+    private  String grouping;
+
     @ColumnInfo(name =  "exerciseImagePath")
     private String exerciseImagePath;
 
@@ -21,10 +24,11 @@ public class ExercisesDetails {
     private String instructionsImagePath;
 
     //Initializer to add new users
-    public ExercisesDetails (String exerciseID, String name, String exerciseImagePath, String instructionsImagePath)
+    public ExercisesDetails (String exerciseID, String name, String exerciseImagePath, String instructionsImagePath, String grouping)
     {
         this.exerciseID = exerciseID;
         this.name = name;
+        this.grouping = grouping;
         this.exerciseImagePath = exerciseImagePath;
         this.instructionsImagePath = instructionsImagePath;
 
@@ -34,6 +38,11 @@ public class ExercisesDetails {
 
     public void setExerciseID(String exerciseID) { this.exerciseID = exerciseID; }
     public String getExerciseID() { return exerciseID; }
+
+    public void setGrouping(String grouping) { this.grouping = grouping; }
+    public String getGrouping() {
+        return grouping;
+    }
 
     public void setName(String name) { this.name = name; }
     public String getName() {

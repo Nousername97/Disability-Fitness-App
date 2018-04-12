@@ -14,10 +14,13 @@ public interface ExercisesDetailsDao {
 
 
     @Query("SELECT * FROM  ExercisesDetails")
-    LiveData<List<ExercisesDetails>> getExercises();
+    List<ExercisesDetails> getExercises();
 
     @Query("SELECT * FROM ExercisesDetails WHERE exerciseID = :exerciseID")
     ExercisesDetails getExerciseById(String exerciseID);
+
+    @Query("SELECT * FROM ExercisesDetails WHERE grouping = :grouping")
+    List<ExercisesDetails> getExercisesByGroup(String grouping);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insertNewExercise(ExercisesDetails exercisesDetails);
