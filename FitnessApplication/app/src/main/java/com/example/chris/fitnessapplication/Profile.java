@@ -24,14 +24,11 @@ import java.util.Calendar;
 
 public class Profile extends AppCompatActivity {
 
-    private EditText firstName;
-    private EditText lastName;
-    private EditText birthDate;
-    private EditText weight;
-    private EditText height;
+    private EditText firstName, lastName, birthDate, weight, height;
     private Spinner gender;
     private CheckBox isDisabled;
-    private Button continueBtn; //continue is an inbuilt keyword
+    private Button continueBtn;
+    private String str_fname, str_lname, str_bdate, str_weight, str_height;
 
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
@@ -51,31 +48,93 @@ public class Profile extends AppCompatActivity {
         isDisabled = (CheckBox)findViewById((R.id.chkDisabled));
         continueBtn = (Button)findViewById(R.id.btnContinue);
 
+        // makes DoB text-box non editable
+        birthDate.setFocusable(false);
+        birthDate.setClickable(true);
+
         birthDateContent();
         setGenderContent();
-        onContinueButtonClick();
-    }
 
-    public void onContinueButtonClick() {
-
-        emptyFields();
-        //validate();
-        //healthAssessment();
-
-        continueBtn = (Button)findViewById(R.id.btnContinue);
         continueBtn.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
-                        Intent i = new Intent(Profile.this, HomePage.class);
-                        startActivity(i);
+                        onContinueButtonClick();
                     }
                 }
         );
     }
 
+    private void getInputs() {
+        str_fname = firstName.getText().toString().trim();
+        str_lname = lastName.getText().toString().trim();
+        str_bdate = birthDate.getText().toString().trim();
+        str_weight = weight.getText().toString().trim();
+        str_height = height.getText().toString().trim();
+    }
+
+    public void onContinueButtonClick() {
+
+        //healthAssessment();
+        getInputs();
+
+        if (!validateInput()) {
+            Toast.makeText(Profile.this, "Error with validation", Toast.LENGTH_SHORT);
+        }
+        else
+        {
+            Toast.makeText(Profile.this, "Success with validation", Toast.LENGTH_SHORT);
+            // Navigate to home page if success
+            Intent i = new Intent(Profile.this, HomePage.class);
+            startActivity(i);
+        }
+    }
+
+    private boolean validateInput() {
+        final int CHAR_MAX = 32;
+        // kg
+        final double WEIGHT_MIN = 10.0;
+        final double WEIGHT_MAX = 500.0;
+        // cm
+        final double HEIGHT_MIN = 50.0;
+        final double HEIGHT_MAX = 300.0;
+
+        boolean valid = true;
+        int int_weight = 0;
+        int int_height = 0;
+
+        try {
+            int_weight = Integer.parseInt(str_weight);
+            int_height = Integer.parseInt(str_height);
+        } catch(NumberFormatException nfe) {
+
+        }
+
+        if (str_fname.isEmpty() || str_fname.length() > CHAR_MAX) {
+            firstName.setError("Please enter a valid first name");
+            valid = false;
+        }
+        if (str_lname.isEmpty() || str_lname.length() > CHAR_MAX) {
+            lastName.setError("Please enter a valid last name");
+            valid = false;
+        }
+        if (str_bdate.isEmpty()) {
+            birthDate.setError("Please enter a valid date of birth");
+            valid = false;
+        }
+        if (str_weight.isEmpty() || int_weight <= WEIGHT_MIN || int_weight >= WEIGHT_MAX) {
+            weight.setError("Please enter a valid weight");
+            valid = false;
+        }
+        if (str_height.isEmpty() || int_height <= HEIGHT_MIN || int_height >= HEIGHT_MAX) {
+            height.setError("Please enter a valid height");
+            valid = false;
+        }
+
+        return valid;
+    }
+
     private void setGenderContent() {
         // method for setting content in the gender spinner
-
         String[] arraySpinner = new String[] {
                 "Male", "Female", "Prefer not to say"
         };
@@ -84,56 +143,6 @@ public class Profile extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arraySpinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         gender.setAdapter(adapter);
-    }
-
-    private void emptyFields() {
-
-        // handles empty fields individually
-        if (TextUtils.isEmpty(firstName.getText().toString())) {
-            firstName.setError("First name is required!");
-        }
-
-        if (TextUtils.isEmpty(lastName.getText().toString())) {
-            lastName.setError("Last name is required!");
-        }
-
-        if (TextUtils.isEmpty(weight.getText().toString())) {
-            weight.setError("Weight input is required!");
-        }
-
-        if (TextUtils.isEmpty(height.getText().toString())) {
-            height.setError("Height input is required!");
-        }
-    }
-
-    private void validate() {
-
-        // min and max for height and weight
-        final double WEIGHT_MIN = 10.0;
-        final double WEIGHT_MAX = 500.0;
-        final double HEIGHT_MIN = 50.0;
-        final double HEIGHT_MAX = 300.0;
-
-        //double validatedWeight = Integer.valueOf(weight.getText().toString());
-        //double validatedHeight = Integer.valueOf(height.getText().toString());
-        double validatedWeight = 10;
-        double validatedHeight = 10;
-
-        if (firstName.getText().toString().length() <= 3) {
-            firstName.setError("First name has to be more than 3 characters!");
-        }
-
-        if (lastName.getText().toString().length() <= 3) {
-            lastName.setError("Last name has to be more than 3 characters!");
-        }
-
-        if (validatedWeight < WEIGHT_MIN || validatedWeight > WEIGHT_MAX) {
-            weight.setError("Weight input must be between 10kg and 500kg!");
-        }
-
-        if (validatedHeight < HEIGHT_MIN|| validatedHeight > HEIGHT_MAX) {
-            height.setError("Height input must be between 50cm and 300cm!");
-        }
     }
 
     private void birthDateContent() {
