@@ -34,6 +34,12 @@
         <activity android:name=".forearmList"/>
         <activity android:name=".shoulderList"/>
         <activity android:name=".tricepList"/>
+        <activity android:name=".fitnessAssessment"/>
+        <activity android:name=".HeadPage"/>
+        <activity android:name=".TorsoPage"/>
+        <activity android:name=".LegsPage"/>
+        <activity android:name=".rArmPage"/>
+        <activity android:name=".lArmPage"/>
 
     </application>
 

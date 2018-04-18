@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 
-public class HeadPage extends AppCompatActivity{
+public class LegsPage extends AppCompatActivity{
 
     private Spinner partSpinner, levelSpinner;
     private Button btnContinue;
@@ -17,7 +17,7 @@ public class HeadPage extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.headpage);
+        setContentView(R.layout.legspage);
 
         partSpinner = (Spinner)findViewById(R.id.partSpinner);
         levelSpinner = (Spinner)findViewById(R.id.levelSpinner);
@@ -36,14 +36,14 @@ public class HeadPage extends AppCompatActivity{
     }
 
     public void onContinueButtonClick() {
-        Intent i = new Intent(HeadPage.this, MainActivity.class);
+        Intent i = new Intent(LegsPage.this, MainActivity.class);
         startActivity(i);
     }
 
     private void setPartContent() {
         // method for setting content in the body part spinner
         String[] arraySpinner = new String[] {
-                "Neck", "Eyes", "Ears"
+                "Pelvis", "Thigh", "Knee", "Ankle", "Feet", "Whole Leg"
         };
 
         ArrayAdapter<String> adapter;
@@ -57,7 +57,7 @@ public class HeadPage extends AppCompatActivity{
         String[] arraySpinner = new String[] {
                 "1 - Recovering: exercise should be done but not focused",
                 "2 - Sprains: exercise should be limited",
-                "3 - Breaks or worse: exercise should be avoided"
+                "3 - Severe injury/condition: exercise should be avoided"
 
         };
 
