@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.chris.fitnessapplication.MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_biceps"
+            android:layout_width="42dp"
+            android:layout_height="36dp"
+            android:text="Biceps"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+
+        <ListView
+            android:id="@+id/ExersizeList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/btn_biceps"
+            android:layout_marginBottom="50dp"
+            android:scrollbars="vertical" />
+
+        <Button
+            android:id="@+id/btn_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="Profile" />
+
+        <Button
+            android:id="@+id/btn_legs"
+            android:layout_width="42dp"
+            android:layout_height="36dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/btn_biceps"
+            android:layout_toRightOf="@+id/btn_biceps"
+            android:text="Legs" />
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="42dp"
+            android:layout_height="36dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/btn_legs"
+            android:layout_toRightOf="@+id/btn_legs"
+            android:text="Back" />
+
+        <Button
+            android:id="@+id/btn_abs"
+            android:layout_width="42dp"
+            android:layout_height="36dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/btn_back"
+            android:layout_toRightOf="@+id/btn_back"
+            android:text="Abs" />
+
+        <Button
+            android:id="@+id/btn_calf"
+            android:layout_width="42dp"
+            android:layout_height="36dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/btn_abs"
+            android:layout_toRightOf="@+id/btn_abs"
+            android:text="Calf" />
+
+        <Button
+            android:id="@+id/btn_chest"
+            android:layout_width="42dp"
+            android:layout_height="36dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/btn_calf"
+            android:layout_toRightOf="@+id/btn_calf"
+            android:text="Chest" />
+
+        <Button
+            android:id="@+id/btn_forearm"
+            android:layout_width="42dp"
+            android:layout_height="36dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/btn_chest"
+            android:layout_toRightOf="@+id/btn_chest"
+            android:text="Forearms" />
+
+        <Button
+            android:id="@+id/btn_shoulder"
+            android:layout_width="42dp"
+            android:layout_height="36dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/btn_forearm"
+            android:layout_toRightOf="@+id/btn_forearm"
+            android:text="Shoulder" />
+
+        <Button
+            android:id="@+id/btn_tricep"
+            android:layout_width="42dp"
+            android:layout_height="36dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/btn_shoulder"
+            android:layout_toRightOf="@+id/btn_shoulder"
+            android:text="Triceps" />
+    </RelativeLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>
