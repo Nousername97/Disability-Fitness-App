@@ -31,15 +31,6 @@
             android:scrollbars="vertical" />
 
         <Button
-            android:id="@+id/btn_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:text="Profile" />
-
-        <Button
             android:id="@+id/btn_legs"
             android:layout_width="42dp"
             android:layout_height="36dp"
@@ -111,7 +102,5 @@
             android:layout_toRightOf="@+id/btn_shoulder"
             android:text="Triceps" />
     </RelativeLayout>
-
-
 
 </android.support.constraint.ConstraintLayout>
