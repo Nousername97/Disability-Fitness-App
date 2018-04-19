@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,76 +18,101 @@ public class MainActivity extends AppCompatActivity {
     private Button btnHome;
     private Button btnAssessment;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-                    return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
-                    return true;
-            }
-            return false;
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.setOnNavigationItemSelectedListener(navListener);
 
-        onHomePageButtonClick();
-        onProfileButtonClick();
-        onAssessmentButtonClick();
+        // Default page on app startup
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new Profile()).commit();
+        }
+        else
+        {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new HomePage()).commit();
+        }
     }
 
-    public void onProfileButtonClick() {
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    Fragment selectedFragment = null;
 
-        btnProfile = (Button)findViewById(R.id.btn_profile);
-        btnProfile.setOnClickListener(
-                new View.OnClickListener() {
-                    public void onClick(View v) {
-                        Intent i = new Intent(MainActivity.this, Profile.class);
-                        startActivity(i);
+                    switch (item.getItemId()) {
+                        case R.id.navigation_home:
+                            selectedFragment = new HomePage();
+                            break;
+                        case R.id.navigation_profile:
+                            selectedFragment = new Profile();
+                            break;
+                        case R.id.navigation_health:
+                            selectedFragment = new fitnessAssessment();
+                            break;
                     }
-                }
-        );
-    }
 
-    public void onHomePageButtonClick() {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            selectedFragment).commit();
 
-        btnHome = (Button)findViewById(R.id.btn_homepage);
-        btnHome.setOnClickListener(
-                new View.OnClickListener() {
-                    public void onClick(View v) {
-                        Intent i = new Intent(MainActivity.this, HomePage.class);
-                        startActivity(i);
-                    }
+                    return true;
                 }
-        );
-    }
-    public void onAssessmentButtonClick() {
-
-        btnAssessment = (Button)findViewById(R.id.btn_assess);
-        btnAssessment.setOnClickListener(
-                new View.OnClickListener() {
-                    public void onClick(View v) {
-                        Intent i = new Intent(MainActivity.this, fitnessAssessment.class);
-                        startActivity(i);
-                    }
-                }
-        );
-    }
+            };
+//
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_main);
+//
+//        mTextMessage = (TextView) findViewById(R.id.message);
+//        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+//        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+//
+//        onHomePageButtonClick();
+//        onProfileButtonClick();
+//        onAssessmentButtonClick();
+//    }
+//
+//    public void onProfileButtonClick() {
+//
+//        btnProfile = (Button)findViewById(R.id.btn_profile);
+//        btnProfile.setOnClickListener(
+//                new View.OnClickListener() {
+//                    public void onClick(View v) {
+//                        Intent i = new Intent(MainActivity.this, Profile.class);
+//                        startActivity(i);
+//                    }
+//                }
+//        );
+//    }
+//
+//    public void onHomePageButtonClick() {
+//
+//        btnHome = (Button)findViewById(R.id.btn_homepage);
+//        btnHome.setOnClickListener(
+//                new View.OnClickListener() {
+//                    public void onClick(View v) {
+//                        Intent i = new Intent(MainActivity.this, HomePage.class);
+//                        startActivity(i);
+//                    }
+//                }
+//        );
+//    }
+//    public void onAssessmentButtonClick() {
+//
+//        btnAssessment = (Button)findViewById(R.id.btn_assess);
+//        btnAssessment.setOnClickListener(
+//                new View.OnClickListener() {
+//                    public void onClick(View v) {
+//                        Intent i = new Intent(MainActivity.this, fitnessAssessment.class);
+//                        startActivity(i);
+//                    }
+//                }
+//        );
+//    }
 
 }

@@ -2,16 +2,16 @@ package com.example.chris.fitnessapplication;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -22,7 +22,11 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
-public class Profile extends AppCompatActivity {
+/**
+ * Created by kelvin on 18/04/2018.
+ */
+
+public class Profile extends Fragment {
 
     private EditText firstName, lastName, birthDate, weight, height;
     private Spinner gender;
@@ -32,21 +36,19 @@ public class Profile extends AppCompatActivity {
 
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
-
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.activity_profile, container, false);
         disclaimerContent();
 
-        firstName = (EditText)findViewById(R.id.etFirstName);
-        lastName = (EditText)findViewById(R.id.etLastName);
-        birthDate = (EditText)findViewById(R.id.etBirthDate);
-        weight = (EditText)findViewById(R.id.etWeight);
-        height = (EditText)findViewById(R.id.etHeight);
-        gender = (Spinner)findViewById(R.id.spnGender);
-        isDisabled = (CheckBox)findViewById((R.id.chkDisabled));
-        continueBtn = (Button)findViewById(R.id.btnContinue);
+        firstName = (EditText)rootView.findViewById(R.id.etFirstName);
+        lastName = (EditText)rootView.findViewById(R.id.etLastName);
+        birthDate = (EditText)rootView.findViewById(R.id.etBirthDate);
+        weight = (EditText)rootView.findViewById(R.id.etWeight);
+        height = (EditText)rootView.findViewById(R.id.etHeight);
+        gender = (Spinner)rootView.findViewById(R.id.spnGender);
+        continueBtn = (Button)rootView.findViewById(R.id.btnContinue);
 
         // makes DoB text-box non editable
         birthDate.setFocusable(false);
@@ -62,6 +64,8 @@ public class Profile extends AppCompatActivity {
                     }
                 }
         );
+
+        return rootView;
     }
 
     private void getInputs() {
@@ -73,19 +77,16 @@ public class Profile extends AppCompatActivity {
     }
 
     public void onContinueButtonClick() {
-
-        //healthAssessment();
         getInputs();
 
         if (!validateInput()) {
-            Toast.makeText(Profile.this, "Error with validation", Toast.LENGTH_SHORT);
+            Toast.makeText(getActivity(), "Error with validation", Toast.LENGTH_SHORT);
         }
         else
         {
-            Toast.makeText(Profile.this, "Success with validation", Toast.LENGTH_SHORT);
-            // Navigate to home page if success
-            Intent i = new Intent(Profile.this, HomePage.class);
-            startActivity(i);
+            Toast.makeText(getActivity(), "Success with validation", Toast.LENGTH_SHORT);
+
+            // TODO Save to database
         }
     }
 
@@ -140,14 +141,13 @@ public class Profile extends AppCompatActivity {
         };
 
         ArrayAdapter<String> adapter;
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arraySpinner);
+        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, arraySpinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         gender.setAdapter(adapter);
     }
 
     private void birthDateContent() {
         // makes a text field of DoB to chose from
-
         birthDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -157,7 +157,7 @@ public class Profile extends AppCompatActivity {
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog dialog = new DatePickerDialog(
-                        Profile.this,
+                        getActivity(),
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener, year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -177,7 +177,7 @@ public class Profile extends AppCompatActivity {
     }
 
     private void disclaimerContent() {
-        AlertDialog alert = new AlertDialog.Builder(this).create();
+        AlertDialog alert = new AlertDialog.Builder(getActivity()).create();
 
         alert.setTitle("License agreement\n");
         alert.setMessage("The information provided is for general information purposes only. " +
@@ -194,11 +194,5 @@ public class Profile extends AppCompatActivity {
                     }
                 });
         alert.show();
-    }
-
-    public void healthAssessment() {
-        if (isDisabled.isChecked()) {
-            // TODO ... link to health assessment class to fill out type of body issues
-        }
     }
 }
