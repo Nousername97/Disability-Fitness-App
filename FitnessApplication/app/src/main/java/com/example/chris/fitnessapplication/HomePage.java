@@ -241,7 +241,15 @@ public class HomePage extends AppCompatActivity {
     public List<String> populateList(String group)
     {
         ExerciseDetailsDatabase.getInstance(this).exercisesDetailsDao().insertNewExercise(ExercisePopulateDatabase.populateData());
-
+        ExerciseDetailsDatabase.getInstance(this).exercisesDetailsDao().insertNewExercise(ExercisePopulateDatabase.populateData());
+        ExerciseDetailsDatabase.getInstance(this).exercisesDetailsDao().insertNewExercise(new ExercisesDetails("Squat", "Squat", R.drawable.picture, "\\exercises\\triceps\\One Arm Dumb-bell Curl\\instructions.png", "legs"));
+        ExerciseDetailsDatabase.getInstance(this).exercisesDetailsDao().insertNewExercise(new ExercisesDetails("Chest Press", "Chest Press", R.drawable.picture, "\\exercises\\triceps\\One Arm Dumb-bell Curl\\instructions.png", "chest"));
+        ExerciseDetailsDatabase.getInstance(this).exercisesDetailsDao().insertNewExercise(new ExercisesDetails("Deadlift", "Deadlift", R.drawable.picture, "\\exercises\\triceps\\One Arm Dumb-bell Curl\\instructions.png", "back"));
+        ExerciseDetailsDatabase.getInstance(this).exercisesDetailsDao().insertNewExercise(new ExercisesDetails("Plank", "Plank", R.drawable.picture, "\\exercises\\triceps\\One Arm Dumb-bell Curl\\instructions.png", "abs"));
+        ExerciseDetailsDatabase.getInstance(this).exercisesDetailsDao().insertNewExercise(new ExercisesDetails("Leg press", "Leg press", R.drawable.picture, "\\exercises\\triceps\\One Arm Dumb-bell Curl\\instructions.png", "calf"));
+        ExerciseDetailsDatabase.getInstance(this).exercisesDetailsDao().insertNewExercise(new ExercisesDetails("Row", "Row", R.drawable.picture, "\\exercises\\triceps\\One Arm Dumb-bell Curl\\instructions.png", "shoulder"));
+        ExerciseDetailsDatabase.getInstance(this).exercisesDetailsDao().insertNewExercise(new ExercisesDetails("Dip", "Dip", R.drawable.picture, "\\exercises\\triceps\\One Arm Dumb-bell Curl\\instructions.png", "triceps"));
+        ExerciseDetailsDatabase.getInstance(this).exercisesDetailsDao().insertNewExercise(new ExercisesDetails("Farmer's Walk", "Farmer's Walk", R.drawable.picture, "\\exercises\\triceps\\One Arm Dumb-bell Curl\\instructions.png", "forearm"));
         List<String> listToBeFilled = new ArrayList<String>();
         List<ExercisesDetails> currentExercise = ExerciseDetailsDatabase.getInstance(this).exercisesDetailsDao().getExercisesByGroup(group);
 
