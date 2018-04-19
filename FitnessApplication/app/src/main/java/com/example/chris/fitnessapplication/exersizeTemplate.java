@@ -23,11 +23,14 @@ public class exersizeTemplate extends AppCompatActivity {
 
         ExercisesDetails currentExercise = ExerciseDetailsDatabase.getInstance(exersizeTemplate.this).exercisesDetailsDao().getExerciseByName(exercise);
 
-        TextView exerciseTitle = (TextView)findViewById(R.id.textView2);
+        TextView exerciseTitle = (TextView)findViewById(R.id.textView);
         exerciseTitle.setText(currentExercise.getName());
 
         ImageView exerciseImage = (ImageView)findViewById(R.id.imageView);
         exerciseImage.setImageResource(currentExercise.getExerciseImagePath());
+
+        TextView excerciseDescription = findViewById(R.id.textView2);
+        excerciseDescription.setText(currentExercise.getInstructionsImagePath());
 
     }
 }

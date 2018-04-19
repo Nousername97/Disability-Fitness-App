@@ -13,5 +13,6 @@ public class ExercisePopulateDatabase {
     public static ExercisesDetails populateData() {
         Log.d("prepopulate", "Running");
         return new ExercisesDetails("Dumbbell Curl", "2 Arm Dumb Bell Curl", R.drawable.picture, "\\exercises\\triceps\\One Arm Dumb-bell Curl\\instructions.png", "biceps");
-    }
+}
+
 }
