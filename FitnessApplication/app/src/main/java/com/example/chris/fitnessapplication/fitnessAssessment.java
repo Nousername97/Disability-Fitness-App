@@ -2,13 +2,16 @@ package com.example.chris.fitnessapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 
 
-public class fitnessAssessment extends AppCompatActivity {
+public class fitnessAssessment extends Fragment {
 
     private Button headButton;
     private Button rArmButton;
@@ -16,22 +19,24 @@ public class fitnessAssessment extends AppCompatActivity {
     private Button torsoButton;
     private Button legsButton;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_assessment);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.activity_assessment, container, false);
 
-        headButton = (Button)findViewById(R.id.btn_head);
-        rArmButton = (Button)findViewById(R.id.btn_rightarm);
-        lArmButton = (Button)findViewById(R.id.btn_leftarm);
-        torsoButton = (Button)findViewById(R.id.btn_torso);
-        legsButton = (Button)findViewById(R.id.btn_legs);
+        headButton = (Button)rootView.findViewById(R.id.btn_head);
+        rArmButton = (Button)rootView.findViewById(R.id.btn_rightarm);
+        lArmButton = (Button)rootView.findViewById(R.id.btn_leftarm);
+        torsoButton = (Button)rootView.findViewById(R.id.btn_torso);
+        legsButton = (Button)rootView.findViewById(R.id.btn_legs);
 
         onHeadClick();
         onRightArmClick();
         onLeftArmClick();
         onTorsoClick();
         onLegsClick();
+
+        return rootView;
     }
 
     public void onHeadClick() {
@@ -39,7 +44,7 @@ public class fitnessAssessment extends AppCompatActivity {
         headButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
-                        Intent i = new Intent(fitnessAssessment.this, HeadPage.class);
+                        Intent i = new Intent(getActivity(), HeadPage.class);
                         startActivity(i);
                     }
                 }
@@ -51,7 +56,7 @@ public class fitnessAssessment extends AppCompatActivity {
         torsoButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
-                        Intent i = new Intent(fitnessAssessment.this, TorsoPage.class);
+                        Intent i = new Intent(getActivity(), TorsoPage.class);
                         startActivity(i);
                     }
                 }
@@ -63,7 +68,7 @@ public class fitnessAssessment extends AppCompatActivity {
         legsButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
-                        Intent i = new Intent(fitnessAssessment.this, LegsPage.class);
+                        Intent i = new Intent(getActivity(), LegsPage.class);
                         startActivity(i);
                     }
                 }
@@ -75,7 +80,7 @@ public class fitnessAssessment extends AppCompatActivity {
         rArmButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
-                        Intent i = new Intent(fitnessAssessment.this, rArmPage.class);
+                        Intent i = new Intent(getActivity(), rArmPage.class);
                         startActivity(i);
                     }
                 }
@@ -87,7 +92,7 @@ public class fitnessAssessment extends AppCompatActivity {
         lArmButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
-                        Intent i = new Intent(fitnessAssessment.this, lArmPage.class);
+                        Intent i = new Intent(getActivity(), lArmPage.class);
                         startActivity(i);
                     }
                 }

@@ -22,6 +22,10 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
+/**
+ * Created by kelvin on 18/04/2018.
+ */
+
 public class Profile extends Fragment {
 
     private EditText firstName, lastName, birthDate, weight, height;
@@ -31,20 +35,20 @@ public class Profile extends Fragment {
     private String str_fname, str_lname, str_bdate, str_weight, str_height;
 
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_profile, container, false);
         disclaimerContent();
 
-        firstName = (EditText)findViewById(R.id.etFirstName);
-        lastName = (EditText)findViewById(R.id.etLastName);
-        birthDate = (EditText)findViewById(R.id.etBirthDate);
-        weight = (EditText)findViewById(R.id.etWeight);
-        height = (EditText)findViewById(R.id.etHeight);
-        gender = (Spinner)findViewById(R.id.spnGender);
-        isDisabled = (CheckBox)findViewById((R.id.chkDisabled));
-        continueBtn = (Button)findViewById(R.id.btnContinue);
+        firstName = (EditText)rootView.findViewById(R.id.etFirstName);
+        lastName = (EditText)rootView.findViewById(R.id.etLastName);
+        birthDate = (EditText)rootView.findViewById(R.id.etBirthDate);
+        weight = (EditText)rootView.findViewById(R.id.etWeight);
+        height = (EditText)rootView.findViewById(R.id.etHeight);
+        gender = (Spinner)rootView.findViewById(R.id.spnGender);
+        continueBtn = (Button)rootView.findViewById(R.id.btnContinue);
 
         // makes DoB text-box non editable
         birthDate.setFocusable(false);
@@ -60,6 +64,7 @@ public class Profile extends Fragment {
                     }
                 }
         );
+
         return rootView;
     }
 
@@ -71,20 +76,19 @@ public class Profile extends Fragment {
         str_height = height.getText().toString().trim();
     }
 
+    public void onContinueButtonClick() {
+        getInputs();
 
-        public void onContinueButtonClick() {
-            getInputs();
-
-            if (!validateInput()) {
-                Toast.makeText(getActivity(), "Error with validation", Toast.LENGTH_SHORT);
-            }
-            else
-            {
-                Toast.makeText(getActivity(), "Success with validation", Toast.LENGTH_SHORT);
-
-                // TODO Save to database
-            }
+        if (!validateInput()) {
+            Toast.makeText(getActivity(), "Error with validation", Toast.LENGTH_SHORT);
         }
+        else
+        {
+            Toast.makeText(getActivity(), "Success with validation", Toast.LENGTH_SHORT);
+
+            // TODO Save to database
+        }
+    }
 
     private boolean validateInput() {
         final int CHAR_MAX = 32;
@@ -137,14 +141,13 @@ public class Profile extends Fragment {
         };
 
         ArrayAdapter<String> adapter;
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arraySpinner);
+        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, arraySpinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         gender.setAdapter(adapter);
     }
 
     private void birthDateContent() {
         // makes a text field of DoB to chose from
-
         birthDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -154,7 +157,7 @@ public class Profile extends Fragment {
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog dialog = new DatePickerDialog(
-                        Profile.this,
+                        getActivity(),
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener, year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -174,7 +177,7 @@ public class Profile extends Fragment {
     }
 
     private void disclaimerContent() {
-        AlertDialog alert = new AlertDialog.Builder(this).create();
+        AlertDialog alert = new AlertDialog.Builder(getActivity()).create();
 
         alert.setTitle("License agreement\n");
         alert.setMessage("The information provided is for general information purposes only. " +
@@ -191,11 +194,5 @@ public class Profile extends Fragment {
                     }
                 });
         alert.show();
-    }
-
-    public void healthAssessment() {
-        if (isDisabled.isChecked()) {
-            // TODO ... link to health assessment class to fill out type of body issues
-        }
     }
 }
