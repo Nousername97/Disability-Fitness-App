@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Fitness Application</string>
+    <string name="title_home">Home</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_health">Health</string>
+
+    <string name="biceps">Biceps</string>
+    <string name="back">Back</string>
+    <string name="abs">Abs</string>
+    <string name="calf">calf</string>
+    <string name="chest">chest</string>
+    <string name="forearms">forearms</string>
+    <string name="shoulders">Shoulders</string>
+    <string name="triceps">Triceps</string>
+    <string name="tab9">Tab9</string>
+</resources>

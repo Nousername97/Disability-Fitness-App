@@ -2,16 +2,16 @@ package com.example.chris.fitnessapplication;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
-public class Profile extends AppCompatActivity {
+public class Profile extends Fragment {
 
     private EditText firstName, lastName, birthDate, weight, height;
     private Spinner gender;
@@ -31,12 +31,10 @@ public class Profile extends AppCompatActivity {
     private String str_fname, str_lname, str_bdate, str_weight, str_height;
 
     private DatePickerDialog.OnDateSetListener mDateSetListener;
-
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
-
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.activity_profile, container, false);
         disclaimerContent();
 
         firstName = (EditText)findViewById(R.id.etFirstName);
@@ -62,6 +60,7 @@ public class Profile extends AppCompatActivity {
                     }
                 }
         );
+        return rootView;
     }
 
     private void getInputs() {
@@ -72,22 +71,20 @@ public class Profile extends AppCompatActivity {
         str_height = height.getText().toString().trim();
     }
 
-    public void onContinueButtonClick() {
 
-        //healthAssessment();
-        getInputs();
+        public void onContinueButtonClick() {
+            getInputs();
 
-        if (!validateInput()) {
-            Toast.makeText(Profile.this, "Error with validation", Toast.LENGTH_SHORT);
+            if (!validateInput()) {
+                Toast.makeText(getActivity(), "Error with validation", Toast.LENGTH_SHORT);
+            }
+            else
+            {
+                Toast.makeText(getActivity(), "Success with validation", Toast.LENGTH_SHORT);
+
+                // TODO Save to database
+            }
         }
-        else
-        {
-            Toast.makeText(Profile.this, "Success with validation", Toast.LENGTH_SHORT);
-            // Navigate to home page if success
-            Intent i = new Intent(Profile.this, HomePage.class);
-            startActivity(i);
-        }
-    }
 
     private boolean validateInput() {
         final int CHAR_MAX = 32;
