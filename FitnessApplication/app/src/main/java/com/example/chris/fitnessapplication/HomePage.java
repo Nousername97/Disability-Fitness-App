@@ -63,7 +63,6 @@ public class HomePage extends Fragment{
         shoulderButton = rootView.findViewById(R.id.btn_shoulder);
 
         exersizeList();
-        //onProfileButtonClick();
         onButtonLegsClick();
         onButtonAbsClick();
         onButtonBackClick();
