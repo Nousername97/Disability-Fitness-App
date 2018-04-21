@@ -1,4 +1,4 @@
-package com.example.chris.fitnessapplication;
+package com.example.chris.fitnessapplication.injuries;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,8 +8,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.example.chris.fitnessapplication.MainActivity;
+import com.example.chris.fitnessapplication.R;
 
-public class lArmPage extends AppCompatActivity{
+
+public class rArmPage extends AppCompatActivity{
 
     private Spinner partSpinner, levelSpinner;
     private Button btnContinue;
@@ -17,7 +20,7 @@ public class lArmPage extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.larmpage);
+        setContentView(R.layout.rarmpage);
 
         partSpinner = (Spinner)findViewById(R.id.partSpinner);
         levelSpinner = (Spinner)findViewById(R.id.levelSpinner);
@@ -36,7 +39,7 @@ public class lArmPage extends AppCompatActivity{
     }
 
     public void onContinueButtonClick() {
-        Intent i = new Intent(lArmPage.this, MainActivity.class);
+        Intent i = new Intent(rArmPage.this, MainActivity.class);
         startActivity(i);
     }
 

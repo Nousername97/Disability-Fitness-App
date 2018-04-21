@@ -1,4 +1,4 @@
-package com.example.chris.fitnessapplication;
+package com.example.chris.fitnessapplication.injuries;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,8 +8,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.example.chris.fitnessapplication.MainActivity;
+import com.example.chris.fitnessapplication.R;
 
-public class rArmPage extends AppCompatActivity{
+
+public class LegsPage extends AppCompatActivity{
 
     private Spinner partSpinner, levelSpinner;
     private Button btnContinue;
@@ -17,7 +20,7 @@ public class rArmPage extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.rarmpage);
+        setContentView(R.layout.legspage);
 
         partSpinner = (Spinner)findViewById(R.id.partSpinner);
         levelSpinner = (Spinner)findViewById(R.id.levelSpinner);
@@ -36,14 +39,14 @@ public class rArmPage extends AppCompatActivity{
     }
 
     public void onContinueButtonClick() {
-        Intent i = new Intent(rArmPage.this, MainActivity.class);
+        Intent i = new Intent(LegsPage.this, MainActivity.class);
         startActivity(i);
     }
 
     private void setPartContent() {
         // method for setting content in the body part spinner
         String[] arraySpinner = new String[] {
-                "Shoulder", "Bicep", "Tricep", "Elbow", "Ulna", "Radius", "Wrist", "Hand", "Whole Arm"
+                "Pelvis", "Thigh", "Knee", "Ankle", "Feet", "Whole Leg"
         };
 
         ArrayAdapter<String> adapter;

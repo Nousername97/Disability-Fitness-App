@@ -1,14 +1,20 @@
-package com.example.chris.fitnessapplication;
+package com.example.chris.fitnessapplication.injuries;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.example.chris.fitnessapplication.R;
+import com.example.chris.fitnessapplication.injuries.HeadPage;
+import com.example.chris.fitnessapplication.injuries.LegsPage;
+import com.example.chris.fitnessapplication.injuries.TorsoPage;
+import com.example.chris.fitnessapplication.injuries.lArmPage;
+import com.example.chris.fitnessapplication.injuries.rArmPage;
 
 
 public class fitnessAssessment extends Fragment {

@@ -1,4 +1,4 @@
-package com.example.chris.fitnessapplication;
+package com.example.chris.fitnessapplication.injuries;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+
+import com.example.chris.fitnessapplication.MainActivity;
+import com.example.chris.fitnessapplication.R;
 
 
 public class HeadPage extends AppCompatActivity{
