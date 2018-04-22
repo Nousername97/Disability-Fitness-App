@@ -2,23 +2,16 @@ package com.example.chris.fitnessapplication;
 
 import android.app.DatePickerDialog;
 import android.arch.lifecycle.LiveData;
-import android.arch.persistence.db.SupportSQLiteOpenHelper;
-import android.arch.persistence.room.DatabaseConfiguration;
-import android.arch.persistence.room.InvalidationTracker;
-import android.arch.persistence.room.RoomDatabase;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,11 +25,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.chris.fitnessapplication.data.Exercises.ExerciseDetailsDatabase;
+import com.example.chris.fitnessapplication.data.Exercises.ExercisesDetails;
 import com.example.chris.fitnessapplication.data.Users.UserDetails;
-import com.example.chris.fitnessapplication.data.Users.UserDetailsDao;
 import com.example.chris.fitnessapplication.data.Users.UserDetailsDatabase;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -56,6 +49,7 @@ public class Profile extends Fragment {
     UserDetails user;
     UserDetailsDatabase udd;
     boolean firstStart;
+    int count;
 
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
@@ -68,16 +62,13 @@ public class Profile extends Fragment {
 
         displayFirstUse();
 
-        firstName = (EditText)rootView.findViewById(R.id.etFirstName);
-        lastName = (EditText)rootView.findViewById(R.id.etLastName);
-        birthDate = (EditText)rootView.findViewById(R.id.etBirthDate);
+        firstName = (EditText) rootView.findViewById(R.id.etFirstName);
+        lastName = (EditText) rootView.findViewById(R.id.etLastName);
+        birthDate = (EditText) rootView.findViewById(R.id.etBirthDate);
         weight = rootView.findViewById(R.id.etWeight);
-        height = (EditText)rootView.findViewById(R.id.etHeight);
-        gender = (Spinner)rootView.findViewById(R.id.spnGender);
-        continueBtn = (Button)rootView.findViewById(R.id.btnContinue);
-
-        // for testing database
-        output = (TextView)rootView.findViewById(R.id.tvOutput);
+        height = (EditText) rootView.findViewById(R.id.etHeight);
+        gender = (Spinner) rootView.findViewById(R.id.spnGender);
+        continueBtn = (Button) rootView.findViewById(R.id.btnContinue);
 
         // makes DoB text-box non editable
         birthDate.setFocusable(false);
@@ -85,6 +76,29 @@ public class Profile extends Fragment {
 
         birthDateContent();
         setGenderContent();
+
+        // for testing database
+        output = (TextView) rootView.findViewById(R.id.tvOutput);
+
+        //-------------- pull from database ------------------------------------------
+
+//        TODO pull from database
+
+//        LiveData<UserDetails> currentUser = UserDetailsDatabase.getInstance(getActivity()).UserDetailsDao().getUserById("1");
+//        List<String> listToBeFilled = new ArrayList<String>();
+//
+//        for ( UserDetails temp: currentUser)
+//        {
+//            listToBeFilled.add(temp.getFirstName());
+//        }
+
+//        firstName.setText("Name: ");
+
+        //-------------- pull from database ------------------------------------------
+
+        // checks how many records are in db
+        isDBEmpty();
+        output.setText("Count:" + count);
 
         continueBtn.setOnClickListener(
                 new View.OnClickListener() {
@@ -95,6 +109,16 @@ public class Profile extends Fragment {
         );
 
         return rootView;
+    }
+
+    public boolean isDBEmpty() {
+
+        Boolean rowExists = false;
+        count = UserDetailsDatabase.getInstance(getActivity()).UserDetailsDao().countUsers();
+
+        if (count > 0) {rowExists = true;}
+
+        return rowExists;
     }
 
     private void displayFirstUse() {
@@ -131,43 +155,18 @@ public class Profile extends Fragment {
 
             // TODO Save to database
 
-            // --------------------------------------------------------------------------
+            // ------------------------- Stores user input into database -----------------
             user = new UserDetails(2, str_fname, str_lname, str_bdate, str_weight, str_height, str_gender);
 
-            // error - "Non-static method 'UserDetailsDao()' cannot be referenced from a static context"
-            // UserDetailsDatabase.UserDetailsDao().insertNewUser(user);
-
-            // crashes program
-            udd = new UserDetailsDatabase() {
-                @Override
-                public UserDetailsDao UserDetailsDao() {
-                    return null;
-                }
-
-                @NonNull
-                @Override
-                protected SupportSQLiteOpenHelper createOpenHelper(DatabaseConfiguration config) {
-                    return null;
-                }
-
-                @NonNull
-                @Override
-                protected InvalidationTracker createInvalidationTracker() {
-                    return null;
-                }
-
-                @Override
-                public void clearAllTables() {
-
-                }
-            };
-            udd.UserDetailsDao().insertNewUser(user);
+            // adds to database
+            UserDetailsDatabase.getInstance(getActivity()).UserDetailsDao().insertNewUser(user);
 
             output.setText(user.getFirstName() + " " + user.getLastName() +
                     " " + user.getDateOfBirth() + "\n" + user.getWeight() +
-                    " " + user.getHeight() + " " + user.getGender());
+                    " " + user.getHeight() + " " + user.getGender() +
+                    " count: " + count);
 
-            // --------------------------------------------------------------------------
+            // ------------------------- Stores user input into database -----------------
         }
     }
 
