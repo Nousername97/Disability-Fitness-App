@@ -4,19 +4,21 @@ import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.example.chris.fitnessapplication.data.Converters;
+
 import java.util.concurrent.Executors;
 
-
-@Database(entities = {ExercisesDetails.class}, version = 6)
+@Database(entities = {ExercisesDetails.class}, version = 7)
+@TypeConverters({Converters.class})
 public abstract class ExerciseDetailsDatabase extends RoomDatabase {
 
+
     private static volatile ExerciseDetailsDatabase instance;
-
-
     public abstract ExercisesDetailsDao exercisesDetailsDao();
 
     public static synchronized ExerciseDetailsDatabase getInstance(Context context) {
@@ -37,12 +39,6 @@ public abstract class ExerciseDetailsDatabase extends RoomDatabase {
                 .addCallback(new Callback() {
                 public void onOpen(@NonNull SupportSQLiteDatabase db) {
                     super.onCreate(db);
-                    Executors.newSingleThreadScheduledExecutor().execute(new Runnable() {
-                        @Override
-                        public void run() {
-                            getInstance(context).exercisesDetailsDao().insertNewExercise(ExercisePopulateDatabase.populateData());
-                        }
-                    });
              }
           })
          .build();

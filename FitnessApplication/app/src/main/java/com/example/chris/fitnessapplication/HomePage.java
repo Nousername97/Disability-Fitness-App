@@ -23,7 +23,6 @@ import android.support.v4.app.Fragment;
 
 
 import com.example.chris.fitnessapplication.data.Exercises.ExerciseDetailsDatabase;
-import com.example.chris.fitnessapplication.data.Exercises.ExercisePopulateDatabase;
 import com.example.chris.fitnessapplication.data.Exercises.ExercisesDetails;
 
 import java.util.ArrayList;
@@ -232,6 +231,7 @@ public class HomePage extends Fragment{
 
     public List<String> populateList(String group)
     {
+        /*
         ExerciseDetailsDatabase.getInstance(getActivity()).exercisesDetailsDao().insertNewExercise(ExercisePopulateDatabase.populateData());
         ExerciseDetailsDatabase.getInstance(getActivity()).exercisesDetailsDao().insertNewExercise(ExercisePopulateDatabase.populateData());
         ExerciseDetailsDatabase.getInstance(getActivity()).exercisesDetailsDao().insertNewExercise(new ExercisesDetails("Barbell Curl", "Barbell Curl", R.drawable.barbellcurl, "Stand Upright and hold the Barbell with a shoulder width grip and palms facing upwards, keep your elbows close to your torso, curl the weight forward whilst breathing out and keeping your upper arms stationary, bring the bar to shoulder level before bringing it back to starting position whilst breathing in.", "biceps"));
@@ -251,9 +251,18 @@ public class HomePage extends Fragment{
         ExerciseDetailsDatabase.getInstance(getActivity()).exercisesDetailsDao().insertNewExercise(new ExercisesDetails("Leg Press", "Leg Press", R.drawable.legpress, "Place your feet on the platform of the leg press machine at shoulder width, press the platform until your legs are near fully extended but taking care not to lock your knees. Slowly lower the platform until your upper and lower legs make a 90-degree angle to return to the starting position.", "legs"));
         ExerciseDetailsDatabase.getInstance(getActivity()).exercisesDetailsDao().insertNewExercise(new ExercisesDetails("Squats with Barbell", "Squats with Barbell", R.drawable.squatswithbarbell,"Begin in a hip width stance with feet slightly out turned, descend by flexing the knees whilst keeping your back straight and trying not to move your hips, keep lowering until the upper legs contact the lower legs, then reverse the motion back to the starting position.", "legs"));
         ExerciseDetailsDatabase.getInstance(getActivity()).exercisesDetailsDao().insertNewExercise(new ExercisesDetails("Leg Extensions", "Leg Extensions", R.drawable.legextensions, "Sit on the machine with your legs under the pad and your feet pointed forward, hold on to the side bars or the seat itself with your hands, once the weight is set extend your legs to the maximum whilst exhaling and hold the position momentarily before returning to the start position.", "legs"));
-        ExerciseDetailsDatabase.getInstance(getActivity()).exercisesDetailsDao().insertNewExercise(new ExercisesDetails("Leg Raises", "Leg Raises", R.drawable.legraises, "Lay on a flat mat with your arms at your sides with palms touching the floor and your legs as out stretched as possible, slowly raise your legs whilst keeping them rigid as high as you can and once you reach your limit hold the position for 1 second, then slowly return to the starting position.", "abs"));
+        */
+
+        //Example of adding tags
+        ArrayList<String> Example = new ArrayList<String>();
+        Example.add("leg");
+        ExerciseDetailsDatabase.getInstance(getActivity()).exercisesDetailsDao().insertNewExercise(new ExercisesDetails("Leg Raises", "Leg Raises", R.drawable.legraises, "Lay on a flat mat with your arms at your sides with palms touching the floor and your legs as out stretched as possible, slowly raise your legs whilst keeping them rigid as high as you can and once you reach your limit hold the position for 1 second, then slowly return to the starting position.", "abs", Example));
+        //End example
+
+        /*
         ExerciseDetailsDatabase.getInstance(getActivity()).exercisesDetailsDao().insertNewExercise(new ExercisesDetails("Air Bike", "Air Bike", R.drawable.airbike, "Lay flat on your back with your shoulders slightly raised and your hands behind your head, raise your legs so that your knees form a 90 degree angle and begin a motion similar to peddling a bike, when your knee comes close to your face move your opposite elbow to meet it.","abs"));
         ExerciseDetailsDatabase.getInstance(getActivity()).exercisesDetailsDao().insertNewExercise(new ExercisesDetails("Crunches", "Crunches", R.drawable.crunches, "Lie on a mat facing upwards with your knees bent, you can use a bench to help keep your knees in this position if required, from the start position curl your shoulders towards your pelvis and then return to the starting position.", "abs"));
+        */
         List<String> listToBeFilled = new ArrayList<String>();
         List<ExercisesDetails> currentExercise = ExerciseDetailsDatabase.getInstance(getActivity()).exercisesDetailsDao().getExercisesByGroup(group);
 
