@@ -1,22 +1,25 @@
 package com.example.chris.fitnessapplication;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.chris.fitnessapplication.injuries.fitnessAssessment;
 
 public class MainActivity extends AppCompatActivity {
-
-    private TextView mTextMessage;
-    private Button btnProfile;
-    private Button btnHome;
-    private Button btnAssessment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,31 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new HomePage()).commit();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.navigation, menu);
+
+        // not only show about in menu
+        menu.getItem(0).setVisible(false);
+        menu.getItem(1).setVisible(false);
+        menu.getItem(2).setVisible(false);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.navigation_about:
+                aboutContent();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -62,57 +90,30 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             };
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-//
-//        mTextMessage = (TextView) findViewById(R.id.message);
-//        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-//        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-//
-//        onHomePageButtonClick();
-//        onProfileButtonClick();
-//        onAssessmentButtonClick();
-//    }
-//
-//    public void onProfileButtonClick() {
-//
-//        btnProfile = (Button)findViewById(R.id.btn_profile);
-//        btnProfile.setOnClickListener(
-//                new View.OnClickListener() {
-//                    public void onClick(View v) {
-//                        Intent i = new Intent(MainActivity.this, Profile.class);
-//                        startActivity(i);
-//                    }
-//                }
-//        );
-//    }
-//
-//    public void onHomePageButtonClick() {
-//
-//        btnHome = (Button)findViewById(R.id.btn_homepage);
-//        btnHome.setOnClickListener(
-//                new View.OnClickListener() {
-//                    public void onClick(View v) {
-//                        Intent i = new Intent(MainActivity.this, HomePage.class);
-//                        startActivity(i);
-//                    }
-//                }
-//        );
-//    }
-//    public void onAssessmentButtonClick() {
-//
-//        btnAssessment = (Button)findViewById(R.id.btn_assess);
-//        btnAssessment.setOnClickListener(
-//                new View.OnClickListener() {
-//                    public void onClick(View v) {
-//                        Intent i = new Intent(MainActivity.this, fitnessAssessment.class);
-//                        startActivity(i);
-//                    }
-//                }
-//        );
-//    }
 
+    private void aboutContent() {
+        String strLink = "<a href=\"http://db.everkinetic.com\">Everkinetic</a>";
+        String message = "All of the exercises information and images used are from " + strLink + "." +
+                        "<br><br>Creators of the app:" +
+                        "<br>Chris <br>James <br>Mike <br>Kelvin ";
+        Spanned myMessage = Html.fromHtml(message);
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("About");
+        builder.setMessage(myMessage);
+        builder.setCancelable(true);
+        AlertDialog alertDialog = builder.create();
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Close",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        alertDialog.show();
+        TextView msgTxt = (TextView) alertDialog.findViewById(android.R.id.message);
+        msgTxt.setMovementMethod(LinkMovementMethod.getInstance());
+    }
 }
