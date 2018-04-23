@@ -18,10 +18,12 @@ public interface UserDetailsDao {
     @Query("SELECT * FROM UserDetails WHERE userID = :userID")
     LiveData<UserDetails> getUserById(String userID);
 
+    @Query("SELECT COUNT(*) FROM UserDetails")
+    int countUsers();
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insertNewUser(UserDetails userDetails);
 
     @Delete
     void  deleteUser(UserDetails userDetails);
-
 }

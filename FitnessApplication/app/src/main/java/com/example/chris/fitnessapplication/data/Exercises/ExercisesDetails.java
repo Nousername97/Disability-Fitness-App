@@ -3,7 +3,13 @@ package com.example.chris.fitnessapplication.data.Exercises;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverter;
+import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
+
+import com.example.chris.fitnessapplication.data.Converters;
+
+import java.util.ArrayList;
 
 @Entity
 public class ExercisesDetails {
@@ -23,14 +29,20 @@ public class ExercisesDetails {
     @ColumnInfo(name =  "instructionsImagePath")
     private String instructionsImagePath;
 
+    @TypeConverters({Converters.class})
+    @ColumnInfo(name = "disabilityTags")
+    private ArrayList<String> disabilityTags;
+
+
     //Initializer to add new users
-    public ExercisesDetails (String exerciseID, String name, int exerciseImagePath, String instructionsImagePath, String grouping)
+    public ExercisesDetails (String exerciseID, String name, int exerciseImagePath, String instructionsImagePath, String grouping, ArrayList<String> disabilityTags)
     {
         this.exerciseID = exerciseID;
         this.name = name;
         this.grouping = grouping;
         this.exerciseImagePath = exerciseImagePath;
         this.instructionsImagePath = instructionsImagePath;
+        this.disabilityTags = disabilityTags;
 
     }
 
@@ -57,6 +69,8 @@ public class ExercisesDetails {
         return instructionsImagePath;
     }
 
+    public void setDisabilityTags(ArrayList<String> disabilityTags) {        this.disabilityTags = disabilityTags;    }
+    public ArrayList<String> getDisabilityTags() {        return disabilityTags;    }
     //endregion
 
 }

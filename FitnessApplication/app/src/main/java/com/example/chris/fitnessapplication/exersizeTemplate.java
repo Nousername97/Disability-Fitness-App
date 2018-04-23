@@ -23,6 +23,7 @@ public class exersizeTemplate extends AppCompatActivity {
 
         ExercisesDetails currentExercise = ExerciseDetailsDatabase.getInstance(exersizeTemplate.this).exercisesDetailsDao().getExerciseByName(exercise);
 
+
         TextView exerciseTitle = (TextView)findViewById(R.id.textView);
         exerciseTitle.setText(currentExercise.getName());
 
