@@ -13,15 +13,20 @@ import java.util.List;
 public interface UserDetailsDao {
 
     @Query("SELECT * FROM UserDetails")
-    LiveData<List<UserDetails>> getUsers();
+    List<UserDetails> getUsers();
 
     @Query("SELECT * FROM UserDetails WHERE userID = :userID")
-    LiveData<UserDetails> getUserById(String userID);
+    LiveData<UserDetails> getUserById(int userID);
+
+//    @Query("SELECT * FROM UserDetails WHERE firstName = :firstName")
+//    String getUserByName (String firstName);
+
+    @Query("SELECT COUNT(*) FROM UserDetails")
+    int countUsers();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insertNewUser(UserDetails userDetails);
 
     @Delete
     void  deleteUser(UserDetails userDetails);
-
 }
