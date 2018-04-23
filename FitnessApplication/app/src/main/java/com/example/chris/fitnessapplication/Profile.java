@@ -30,9 +30,13 @@ import com.example.chris.fitnessapplication.data.Exercises.ExercisesDetails;
 import com.example.chris.fitnessapplication.data.Users.UserDetails;
 import com.example.chris.fitnessapplication.data.Users.UserDetailsDatabase;
 
+import java.net.UnknownServiceException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by kelvin on 18/04/2018.
@@ -46,14 +50,9 @@ public class Profile extends Fragment {
     private Button continueBtn;
     private String str_fname, str_lname, str_bdate, str_weight, str_height, str_gender;
     private TextView output;
-    UserDetails user;
-    UserDetailsDatabase udd;
-    boolean firstStart;
-    int count;
-
     private DatePickerDialog.OnDateSetListener mDateSetListener;
-
-    Cursor c = null;
+    int count;
+    UserDetails user;
 
     @Nullable
     @Override
@@ -80,25 +79,12 @@ public class Profile extends Fragment {
         // for testing database
         output = (TextView) rootView.findViewById(R.id.tvOutput);
 
-        //-------------- pull from database ------------------------------------------
-
-//        TODO pull from database
-
-//        LiveData<UserDetails> currentUser = UserDetailsDatabase.getInstance(getActivity()).UserDetailsDao().getUserById("1");
-//        List<String> listToBeFilled = new ArrayList<String>();
-//
-//        for ( UserDetails temp: currentUser)
-//        {
-//            listToBeFilled.add(temp.getFirstName());
-//        }
-
-//        firstName.setText("Name: ");
-
-        //-------------- pull from database ------------------------------------------
-
-        // checks how many records are in db
-        isDBEmpty();
-        output.setText("Count:" + count);
+        // checks if db is empty and how many records there are
+        if (isDBEmpty())
+        {
+            // pulls from database
+            fillExistingProfile();
+        }
 
         continueBtn.setOnClickListener(
                 new View.OnClickListener() {
@@ -111,8 +97,52 @@ public class Profile extends Fragment {
         return rootView;
     }
 
-    public boolean isDBEmpty() {
+    public List<String> populateList()
+    {
+        List<String> listToBeFilled = new ArrayList<String>();
+        List<UserDetails> currentUser = UserDetailsDatabase.getInstance(getActivity()).UserDetailsDao().getUsers();
 
+        for ( UserDetails temp: currentUser)
+        {
+            listToBeFilled.add(temp.getFirstName());
+            listToBeFilled.add(temp.getLastName());
+            listToBeFilled.add(temp.getDateOfBirth());
+            listToBeFilled.add(temp.getWeight());
+            listToBeFilled.add(temp.getHeight());
+            listToBeFilled.add(temp.getGender());
+        }
+
+        return  listToBeFilled;
+    }
+
+    public void fillExistingProfile() {
+
+        List<String> userList;
+        userList = populateList();
+
+        firstName.setText(userList.get(0));
+        lastName.setText(userList.get(1));
+        birthDate.setText(userList.get(2));
+        weight.setText(userList.get(3));
+        height.setText(userList.get(4));
+
+        String dbGender = userList.get(5);
+
+        if (("Male").equals(dbGender))
+        {
+            gender.setSelection(0);
+        }
+        else if (("Female").equals(dbGender))
+        {
+            gender.setSelection(1);
+        }
+        else
+        {
+            gender.setSelection(2);
+        }
+    }
+
+    public boolean isDBEmpty() {
         Boolean rowExists = false;
         count = UserDetailsDatabase.getInstance(getActivity()).UserDetailsDao().countUsers();
 
@@ -123,14 +153,14 @@ public class Profile extends Fragment {
 
     private void displayFirstUse() {
         // display for first time access
-        SharedPreferences settings = getActivity().getSharedPreferences("PREFS", 0);
-        firstStart = settings.getBoolean("first_time_start", false);
-        if(firstStart)
-        {
-            SharedPreferences.Editor editor = settings.edit();
-            editor.putBoolean("first_time_start", true);
-            editor.commit();
+        boolean isFirstRun = getActivity().getSharedPreferences("PREFERENCE", MODE_PRIVATE).getBoolean("isFirstRun", true);
+        if (isFirstRun){
             disclaimerContent();
+
+            getActivity().getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                    .edit()
+                    .putBoolean("isFirstRun", false)
+                    .apply();
         }
     }
 
@@ -153,20 +183,17 @@ public class Profile extends Fragment {
         {
             Toast.makeText(getActivity(), "Success with validation", Toast.LENGTH_SHORT);
 
-            // TODO Save to database
-
-            // ------------------------- Stores user input into database -----------------
+            // stores with user-input
             user = new UserDetails(2, str_fname, str_lname, str_bdate, str_weight, str_height, str_gender);
 
             // adds to database
             UserDetailsDatabase.getInstance(getActivity()).UserDetailsDao().insertNewUser(user);
 
+            // output for testing
             output.setText(user.getFirstName() + " " + user.getLastName() +
                     " " + user.getDateOfBirth() + "\n" + user.getWeight() +
                     " " + user.getHeight() + " " + user.getGender() +
                     " count: " + count);
-
-            // ------------------------- Stores user input into database -----------------
         }
     }
 
