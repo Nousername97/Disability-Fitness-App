@@ -13,12 +13,12 @@
 
         <Button
             android:id="@+id/btn_biceps"
-            android:layout_width="42dp"
-            android:layout_height="36dp"
-            android:text="Biceps"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:text=""
             tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp" />
-
+            tools:layout_editor_absoluteY="0dp"
+            android:drawableTop="@drawable/ic_biceps" />
 
         <ListView
             android:id="@+id/ExersizeList"
@@ -33,75 +33,83 @@
 
         <Button
             android:id="@+id/btn_legs"
-            android:layout_width="42dp"
-            android:layout_height="36dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/btn_biceps"
             android:layout_toRightOf="@+id/btn_biceps"
-            android:text="Legs" />
+            android:text=""
+            android:drawableTop="@drawable/ic_legs"/>
 
         <Button
             android:id="@+id/btn_back"
-            android:layout_width="42dp"
-            android:layout_height="36dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/btn_legs"
             android:layout_toRightOf="@+id/btn_legs"
-            android:text="Back" />
+            android:text=""
+            android:drawableTop="@drawable/ic_back" />
 
         <Button
             android:id="@+id/btn_abs"
-            android:layout_width="42dp"
-            android:layout_height="36dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/btn_back"
             android:layout_toRightOf="@+id/btn_back"
-            android:text="Abs" />
+            android:text=""
+            android:drawableTop="@drawable/ic_abs" />
 
         <Button
             android:id="@+id/btn_calf"
-            android:layout_width="42dp"
-            android:layout_height="36dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/btn_abs"
             android:layout_toRightOf="@+id/btn_abs"
-            android:text="Calf" />
+            android:text=""
+            android:drawableTop="@drawable/ic_calf" />
 
         <Button
             android:id="@+id/btn_chest"
-            android:layout_width="42dp"
-            android:layout_height="36dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/btn_calf"
             android:layout_toRightOf="@+id/btn_calf"
-            android:text="Chest" />
+            android:text=""
+            android:drawableTop="@drawable/ic_chest" />
 
         <Button
             android:id="@+id/btn_forearm"
-            android:layout_width="42dp"
-            android:layout_height="36dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/btn_chest"
             android:layout_toRightOf="@+id/btn_chest"
-            android:text="Forearms" />
+            android:text=""
+            android:drawableTop="@drawable/ic_forearm" />
 
         <Button
             android:id="@+id/btn_shoulder"
-            android:layout_width="42dp"
-            android:layout_height="36dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/btn_forearm"
             android:layout_toRightOf="@+id/btn_forearm"
-            android:text="Shoulder" />
+            android:text=""
+            android:drawableTop="@drawable/ic_shoulders" />
 
         <Button
             android:id="@+id/btn_tricep"
-            android:layout_width="42dp"
-            android:layout_height="36dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/btn_shoulder"
             android:layout_toRightOf="@+id/btn_shoulder"
-            android:text="Triceps" />
+            android:text=""
+            android:drawableTop="@drawable/ic_triceps" />
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
