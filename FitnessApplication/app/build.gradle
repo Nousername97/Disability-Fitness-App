@@ -48,5 +48,5 @@ dependencies {
     annotationProcessor "android.arch.persistence.room:compiler:1.1.0-alpha3"
     // Test helpers for LiveData
     testImplementation 'android.arch.core:core-testing:1.1.0'
-
+    compile 'com.google.code.gson:gson:2.8.1'
 }
