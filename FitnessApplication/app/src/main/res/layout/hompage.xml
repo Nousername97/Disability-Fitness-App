@@ -17,17 +17,10 @@
             android:id="@+id/btn_biceps"
             android:layout_width="60dp"
             android:layout_height="60dp"
-<<<<<<< HEAD
             android:drawableTop="@drawable/ic_biceps"
             android:text=""
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="0dp" />
-=======
-            android:text=""
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp"
-            android:drawableTop="@drawable/ic_biceps" />
->>>>>>> 8c0ea53b7831d5455fddf5f44c224c609e7c438e
 
         <ListView
             android:id="@+id/ExersizeList"
@@ -45,136 +38,72 @@
             android:id="@+id/btn_legs"
             android:layout_width="60dp"
             android:layout_height="60dp"
-<<<<<<< HEAD
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="74dp"
             android:drawableTop="@drawable/ic_legs"
             android:text="" />
-=======
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/btn_biceps"
-            android:layout_toRightOf="@+id/btn_biceps"
-            android:text=""
-            android:drawableTop="@drawable/ic_legs"/>
->>>>>>> 8c0ea53b7831d5455fddf5f44c224c609e7c438e
 
         <Button
             android:id="@+id/btn_back"
             android:layout_width="60dp"
             android:layout_height="60dp"
-<<<<<<< HEAD
             android:layout_centerHorizontal="true"
             android:drawableTop="@drawable/ic_back"
             android:text="" />
-=======
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/btn_legs"
-            android:layout_toRightOf="@+id/btn_legs"
-            android:text=""
-            android:drawableTop="@drawable/ic_back" />
->>>>>>> 8c0ea53b7831d5455fddf5f44c224c609e7c438e
 
         <Button
             android:id="@+id/btn_abs"
             android:layout_width="60dp"
             android:layout_height="60dp"
-<<<<<<< HEAD
             android:layout_alignParentRight="true"
             android:layout_marginRight="70dp"
             android:drawableTop="@drawable/ic_abs"
             android:text="" />
-=======
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/btn_back"
-            android:layout_toRightOf="@+id/btn_back"
-            android:text=""
-            android:drawableTop="@drawable/ic_abs" />
->>>>>>> 8c0ea53b7831d5455fddf5f44c224c609e7c438e
 
         <Button
             android:id="@+id/btn_calf"
             android:layout_width="60dp"
             android:layout_height="60dp"
-<<<<<<< HEAD
             android:layout_alignParentRight="true"
             android:layout_marginRight="1dp"
             android:drawableTop="@drawable/ic_calf"
             android:text="" />
-=======
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/btn_abs"
-            android:layout_toRightOf="@+id/btn_abs"
-            android:text=""
-            android:drawableTop="@drawable/ic_calf" />
->>>>>>> 8c0ea53b7831d5455fddf5f44c224c609e7c438e
 
         <Button
             android:id="@+id/btn_chest"
             android:layout_width="60dp"
             android:layout_height="60dp"
-<<<<<<< HEAD
             android:layout_alignParentRight="true"
             android:layout_below="@+id/btn_biceps"
             android:drawableTop="@drawable/ic_chest"
             android:text="" />
-=======
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/btn_calf"
-            android:layout_toRightOf="@+id/btn_calf"
-            android:text=""
-            android:drawableTop="@drawable/ic_chest" />
->>>>>>> 8c0ea53b7831d5455fddf5f44c224c609e7c438e
 
         <Button
             android:id="@+id/btn_forearm"
             android:layout_width="60dp"
             android:layout_height="60dp"
-<<<<<<< HEAD
             android:layout_below="@+id/btn_biceps"
             android:drawableTop="@drawable/ic_forearm"
             android:text="" />
-=======
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/btn_chest"
-            android:layout_toRightOf="@+id/btn_chest"
-            android:text=""
-            android:drawableTop="@drawable/ic_forearm" />
->>>>>>> 8c0ea53b7831d5455fddf5f44c224c609e7c438e
 
         <Button
             android:id="@+id/btn_shoulder"
             android:layout_width="60dp"
             android:layout_height="60dp"
-<<<<<<< HEAD
 
             android:layout_below="@+id/btn_biceps"
             android:layout_toLeftOf="@+id/btn_back"
             android:drawableTop="@drawable/ic_shoulders"
             android:text="" />
-=======
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/btn_forearm"
-            android:layout_toRightOf="@+id/btn_forearm"
-            android:text=""
-            android:drawableTop="@drawable/ic_shoulders" />
->>>>>>> 8c0ea53b7831d5455fddf5f44c224c609e7c438e
 
         <Button
             android:id="@+id/btn_tricep"
             android:layout_width="60dp"
             android:layout_height="60dp"
-<<<<<<< HEAD
             android:layout_below="@+id/btn_biceps"
             android:layout_toRightOf="@+id/btn_back"
             android:drawableTop="@drawable/ic_triceps"
             android:text="" />
-=======
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/btn_shoulder"
-            android:layout_toRightOf="@+id/btn_shoulder"
-            android:text=""
-            android:drawableTop="@drawable/ic_triceps" />
->>>>>>> 8c0ea53b7831d5455fddf5f44c224c609e7c438e
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
