@@ -1,22 +1,38 @@
 package com.example.chris.fitnessapplication.data.Users;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
+
+import com.example.chris.fitnessapplication.data.Converters;
+
+import java.util.ArrayList;
 
 @Entity
 public class UserDetails {
 
     @PrimaryKey
     private int userID;
+
     private String firstName;
+
     private String lastName;
+
     private String dateOfBirth;
+
     private String weight;
+
     private String height;
+
     private String gender;
 
+    @TypeConverters({Converters.class})
+    @ColumnInfo(name = "disabilityTags")
+    private ArrayList<String> disabilityTags;
+
     //Initializer to add new users
-    public UserDetails (int userID, String firstName, String lastName, String dateOfBirth, String weight, String height, String gender)
+    public UserDetails (int userID, String firstName, String lastName, String dateOfBirth, String weight, String height, String gender,  ArrayList<String> disabilityTags)
     {
         this.userID = userID;
         this.firstName = firstName;
@@ -25,6 +41,7 @@ public class UserDetails {
         this.weight = weight;
         this.height = height;
         this.gender = gender;
+        this.disabilityTags = disabilityTags;
     }
 
     //region Getters and Setters
@@ -76,11 +93,9 @@ public class UserDetails {
     public String getGender() {
         return gender;
     }
+
+    public void setDisabilityTags(ArrayList<String> disabilityTags) {        this.disabilityTags = disabilityTags;    }
+    public ArrayList<String> getDisabilityTags() {        return disabilityTags;    }
     //endregion
 
-    public static UserDetails[] populateData() {
-        return new UserDetails[] {
-          new UserDetails(1, "James", "Brookes", "01/06/1998", "70", "183", "Male")
-        };
-    }
 }

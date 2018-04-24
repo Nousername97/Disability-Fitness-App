@@ -184,7 +184,8 @@ public class Profile extends Fragment {
             Toast.makeText(getActivity(), "Success with validation", Toast.LENGTH_SHORT);
 
             // stores with user-input
-            user = new UserDetails(2, str_fname, str_lname, str_bdate, str_weight, str_height, str_gender);
+            ArrayList<String> tags = new ArrayList<String>();
+            user = new UserDetails(2, str_fname, str_lname, str_bdate, str_weight, str_height, str_gender, tags);
 
             // adds to database
             UserDetailsDatabase.getInstance(getActivity()).UserDetailsDao().insertNewUser(user);
