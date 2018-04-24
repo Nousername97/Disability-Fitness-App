@@ -261,8 +261,7 @@ public class Profile extends Fragment {
             public void onClick(View view) {
                 Calendar cal = Calendar.getInstance();
                 int year = cal.get(Calendar.YEAR);
-                // month++ because index starts 1 less (i.e. Jan starts at 0)
-                int month = cal.get(Calendar.MONTH) + 1;
+                int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog dialog = new DatePickerDialog(
@@ -277,6 +276,8 @@ public class Profile extends Fragment {
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                // month++ because index starts 1 less (i.e. Jan starts at 0)
+                month++;
                 Log.d("Profile", "onDateSet: dd/mm/yyyy: " + day + "/" + month + "/" + year);
 
                 String date = day + "/" + month + "/" + year;
