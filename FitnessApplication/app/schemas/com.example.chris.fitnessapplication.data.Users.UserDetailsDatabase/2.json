@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "1bd4af3524e969deb60374cb5afebd7f",
+    "identityHash": "14869662a9d42bbf1b56fff64f3c22d1",
     "entities": [
       {
         "tableName": "UserDetails",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userID` INTEGER NOT NULL, `firstName` TEXT, `lastName` TEXT, `dateOfBirth` TEXT, `weight` TEXT, `height` TEXT, `gender` TEXT, PRIMARY KEY(`userID`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userID` INTEGER NOT NULL, `firstName` TEXT, `lastName` TEXT, `dateOfBirth` TEXT, `weight` TEXT, `height` TEXT, `gender` TEXT, `disabilityTags` TEXT, PRIMARY KEY(`userID`))",
         "fields": [
           {
             "fieldPath": "userID",
@@ -49,6 +49,12 @@
             "columnName": "gender",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "disabilityTags",
+            "columnName": "disabilityTags",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -63,7 +69,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"1bd4af3524e969deb60374cb5afebd7f\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"14869662a9d42bbf1b56fff64f3c22d1\")"
     ]
   }
 }

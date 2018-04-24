@@ -16,4 +16,7 @@
         android:icon="@drawable/ic_favorite_black_24dp"
         android:title="@string/title_health" />
 
+    <item
+        android:id="@+id/navigation_about"
+        android:title="@string/title_about" />
 </menu>

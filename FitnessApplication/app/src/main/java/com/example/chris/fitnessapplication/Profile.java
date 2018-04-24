@@ -1,13 +1,17 @@
 package com.example.chris.fitnessapplication;
 
 import android.app.DatePickerDialog;
+import android.arch.lifecycle.LiveData;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +22,21 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.chris.fitnessapplication.data.Exercises.ExerciseDetailsDatabase;
+import com.example.chris.fitnessapplication.data.Exercises.ExercisesDetails;
+import com.example.chris.fitnessapplication.data.Users.UserDetails;
+import com.example.chris.fitnessapplication.data.Users.UserDetailsDatabase;
+
+import java.net.UnknownServiceException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Objects;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by kelvin on 18/04/2018.
@@ -32,23 +48,26 @@ public class Profile extends Fragment {
     private Spinner gender;
     private CheckBox isDisabled;
     private Button continueBtn;
-    private String str_fname, str_lname, str_bdate, str_weight, str_height;
-
+    private String str_fname, str_lname, str_bdate, str_weight, str_height, str_gender;
+    private TextView output;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+    int count;
+    UserDetails user;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_profile, container, false);
-        disclaimerContent();
 
-        firstName = (EditText)rootView.findViewById(R.id.etFirstName);
-        lastName = (EditText)rootView.findViewById(R.id.etLastName);
-        birthDate = (EditText)rootView.findViewById(R.id.etBirthDate);
-        weight = (EditText)rootView.findViewById(R.id.etWeight);
-        height = (EditText)rootView.findViewById(R.id.etHeight);
-        gender = (Spinner)rootView.findViewById(R.id.spnGender);
-        continueBtn = (Button)rootView.findViewById(R.id.btnContinue);
+        displayFirstUse();
+
+        firstName = (EditText) rootView.findViewById(R.id.etFirstName);
+        lastName = (EditText) rootView.findViewById(R.id.etLastName);
+        birthDate = (EditText) rootView.findViewById(R.id.etBirthDate);
+        weight = rootView.findViewById(R.id.etWeight);
+        height = (EditText) rootView.findViewById(R.id.etHeight);
+        gender = (Spinner) rootView.findViewById(R.id.spnGender);
+        continueBtn = (Button) rootView.findViewById(R.id.btnContinue);
 
         // makes DoB text-box non editable
         birthDate.setFocusable(false);
@@ -56,6 +75,16 @@ public class Profile extends Fragment {
 
         birthDateContent();
         setGenderContent();
+
+        // for testing database
+        output = (TextView) rootView.findViewById(R.id.tvOutput);
+
+        // checks if db is empty and how many records there are
+        if (isDBEmpty())
+        {
+            // pulls from database
+            fillExistingProfile();
+        }
 
         continueBtn.setOnClickListener(
                 new View.OnClickListener() {
@@ -68,12 +97,80 @@ public class Profile extends Fragment {
         return rootView;
     }
 
+    public List<String> populateList()
+    {
+        List<String> listToBeFilled = new ArrayList<String>();
+        List<UserDetails> currentUser = UserDetailsDatabase.getInstance(getActivity()).UserDetailsDao().getUsers();
+
+        for ( UserDetails temp: currentUser)
+        {
+            listToBeFilled.add(temp.getFirstName());
+            listToBeFilled.add(temp.getLastName());
+            listToBeFilled.add(temp.getDateOfBirth());
+            listToBeFilled.add(temp.getWeight());
+            listToBeFilled.add(temp.getHeight());
+            listToBeFilled.add(temp.getGender());
+        }
+
+        return  listToBeFilled;
+    }
+
+    public void fillExistingProfile() {
+
+        List<String> userList;
+        userList = populateList();
+
+        firstName.setText(userList.get(0));
+        lastName.setText(userList.get(1));
+        birthDate.setText(userList.get(2));
+        weight.setText(userList.get(3));
+        height.setText(userList.get(4));
+
+        String dbGender = userList.get(5);
+
+        if (("Male").equals(dbGender))
+        {
+            gender.setSelection(0);
+        }
+        else if (("Female").equals(dbGender))
+        {
+            gender.setSelection(1);
+        }
+        else
+        {
+            gender.setSelection(2);
+        }
+    }
+
+    public boolean isDBEmpty() {
+        Boolean rowExists = false;
+        count = UserDetailsDatabase.getInstance(getActivity()).UserDetailsDao().countUsers();
+
+        if (count > 0) {rowExists = true;}
+
+        return rowExists;
+    }
+
+    private void displayFirstUse() {
+        // display for first time access
+        boolean isFirstRun = getActivity().getSharedPreferences("PREFERENCE", MODE_PRIVATE).getBoolean("isFirstRun", true);
+        if (isFirstRun){
+            disclaimerContent();
+
+            getActivity().getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                    .edit()
+                    .putBoolean("isFirstRun", false)
+                    .apply();
+        }
+    }
+
     private void getInputs() {
         str_fname = firstName.getText().toString().trim();
         str_lname = lastName.getText().toString().trim();
         str_bdate = birthDate.getText().toString().trim();
         str_weight = weight.getText().toString().trim();
         str_height = height.getText().toString().trim();
+        str_gender = gender.getSelectedItem().toString();
     }
 
     public void onContinueButtonClick() {
@@ -86,7 +183,18 @@ public class Profile extends Fragment {
         {
             Toast.makeText(getActivity(), "Success with validation", Toast.LENGTH_SHORT);
 
-            // TODO Save to database
+            // stores with user-input
+            ArrayList<String> tags = new ArrayList<String>();
+            user = new UserDetails(2, str_fname, str_lname, str_bdate, str_weight, str_height, str_gender, tags);
+
+            // adds to database
+            UserDetailsDatabase.getInstance(getActivity()).UserDetailsDao().insertNewUser(user);
+
+            // output for testing
+            output.setText(user.getFirstName() + " " + user.getLastName() +
+                    " " + user.getDateOfBirth() + "\n" + user.getWeight() +
+                    " " + user.getHeight() + " " + user.getGender() +
+                    " count: " + count);
         }
     }
 
@@ -100,12 +208,12 @@ public class Profile extends Fragment {
         final double HEIGHT_MAX = 300.0;
 
         boolean valid = true;
-        int int_weight = 0;
-        int int_height = 0;
+        double double_weight = 0;
+        double double_height = 0;
 
         try {
-            int_weight = Integer.parseInt(str_weight);
-            int_height = Integer.parseInt(str_height);
+            double_weight = Double.parseDouble(str_weight);
+            double_height = Double.parseDouble(str_height);
         } catch(NumberFormatException nfe) {
 
         }
@@ -122,11 +230,11 @@ public class Profile extends Fragment {
             birthDate.setError("Please enter a valid date of birth");
             valid = false;
         }
-        if (str_weight.isEmpty() || int_weight <= WEIGHT_MIN || int_weight >= WEIGHT_MAX) {
+        if (str_weight.isEmpty() || double_weight <= WEIGHT_MIN || double_weight >= WEIGHT_MAX) {
             weight.setError("Please enter a valid weight");
             valid = false;
         }
-        if (str_height.isEmpty() || int_height <= HEIGHT_MIN || int_height >= HEIGHT_MAX) {
+        if (str_height.isEmpty() || double_height <= HEIGHT_MIN || double_height >= HEIGHT_MAX) {
             height.setError("Please enter a valid height");
             valid = false;
         }
@@ -153,7 +261,8 @@ public class Profile extends Fragment {
             public void onClick(View view) {
                 Calendar cal = Calendar.getInstance();
                 int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
+                // month++ because index starts 1 less (i.e. Jan starts at 0)
+                int month = cal.get(Calendar.MONTH) + 1;
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog dialog = new DatePickerDialog(
