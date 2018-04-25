@@ -58,6 +58,7 @@ public class HeadPage extends AppCompatActivity{
         disabilityTags = dataInput.getDisabilityTags();
         disabilityTags.add(bodyPartStr);
         dataInput.setDisabilityTags(disabilityTags);
+        UserDetailsDatabase.getInstance(this).UserDetailsDao().insertNewUser(dataInput);
 
     }
 
