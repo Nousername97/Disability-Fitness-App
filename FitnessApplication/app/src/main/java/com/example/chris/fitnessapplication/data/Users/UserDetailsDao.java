@@ -16,7 +16,7 @@ public interface UserDetailsDao {
     List<UserDetails> getUsers();
 
     @Query("SELECT * FROM UserDetails WHERE userID = :userID")
-    LiveData<UserDetails> getUserById(int userID);
+    UserDetails getUserById(int userID);
 
 //    @Query("SELECT * FROM UserDetails WHERE firstName = :firstName")
 //    String getUserByName (String firstName);
