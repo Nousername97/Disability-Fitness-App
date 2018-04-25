@@ -46,8 +46,8 @@ public class HeadPage extends AppCompatActivity{
     }
 
     public void getStrings() {
-        bodyPartStr = partSpinner.toString().trim();
-        levelStr = levelSpinner.toString().trim();
+        bodyPartStr = partSpinner.getSelectedItem().toString();
+        levelStr = levelSpinner.getSelectedItem().toString();
     }
 
     public void onContinueButtonClick() {
