@@ -45,8 +45,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class Profile extends Fragment {
 
     private EditText firstName, lastName, birthDate, weight, height;
-    private Spinner gender;
-    private CheckBox isDisabled;
+    private Spinner gender, disability;
     private Button continueBtn;
     private String str_fname, str_lname, str_bdate, str_weight, str_height, str_gender;
     private TextView output;
@@ -69,6 +68,8 @@ public class Profile extends Fragment {
         gender = (Spinner) rootView.findViewById(R.id.spnGender);
         continueBtn = (Button) rootView.findViewById(R.id.btnContinue);
 
+        disability = (Spinner) rootView.findViewById(R.id.spnTags);
+
         // makes DoB text-box non editable
         birthDate.setFocusable(false);
         birthDate.setClickable(true);
@@ -76,14 +77,14 @@ public class Profile extends Fragment {
         birthDateContent();
         setGenderContent();
 
-        // for testing database
-        output = (TextView) rootView.findViewById(R.id.tvOutput);
-
         // checks if db is empty and how many records there are
         if (isDBEmpty())
         {
             // pulls from database
             fillExistingProfile();
+
+            // pulls from database for disabilities
+            fillDisabilitySpinner();
         }
 
         continueBtn.setOnClickListener(
@@ -97,7 +98,29 @@ public class Profile extends Fragment {
         return rootView;
     }
 
-    public List<String> populateList()
+    private void fillDisabilitySpinner() {
+
+        ArrayList<String> disabilityTags;
+
+        // for current user (id 2)
+        user =  UserDetailsDatabase.getInstance(getActivity()).UserDetailsDao().getUserById(2);
+
+        // get tag array and put inside local array
+        disabilityTags = user.getDisabilityTags();
+
+        int arrSize = disabilityTags.size();
+
+        if (arrSize != 0)
+        {
+            // output type of disability in dropdown
+            ArrayAdapter<String> adapter;
+            adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, disabilityTags);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            disability.setAdapter(adapter);
+        }
+    }
+
+    private List<String> populateList()
     {
         List<String> listToBeFilled = new ArrayList<String>();
         List<UserDetails> currentUser = UserDetailsDatabase.getInstance(getActivity()).UserDetailsDao().getUsers();
@@ -115,7 +138,7 @@ public class Profile extends Fragment {
         return  listToBeFilled;
     }
 
-    public void fillExistingProfile() {
+    private void fillExistingProfile() {
 
         List<String> userList;
         userList = populateList();
@@ -142,7 +165,7 @@ public class Profile extends Fragment {
         }
     }
 
-    public boolean isDBEmpty() {
+    private boolean isDBEmpty() {
         Boolean rowExists = false;
         count = UserDetailsDatabase.getInstance(getActivity()).UserDetailsDao().countUsers();
 
@@ -177,24 +200,39 @@ public class Profile extends Fragment {
         getInputs();
 
         if (!validateInput()) {
-            Toast.makeText(getActivity(), "Error with validation", Toast.LENGTH_SHORT);
+            Toast.makeText(getActivity(), "Error with validation", Toast.LENGTH_SHORT).show();
         }
         else
         {
-            Toast.makeText(getActivity(), "Success with validation", Toast.LENGTH_SHORT);
+            ArrayList<String> tags = new ArrayList<String>();
+
+            // if db contains users
+            if(isDBEmpty())
+            {
+                // for current user (id 2)
+                UserDetails temp =  UserDetailsDatabase.getInstance(getActivity()).UserDetailsDao().getUserById(2);
+
+                int arrSize = temp.getDisabilityTags().size();
+
+                // get tag array and put inside local array if array no empty
+                if (arrSize != 0)
+                {
+                    tags = temp.getDisabilityTags();
+                }
+                else
+                {
+                    tags.add("None");
+                }
+            }
 
             // stores with user-input
-            ArrayList<String> tags = new ArrayList<String>();
             user = new UserDetails(2, str_fname, str_lname, str_bdate, str_weight, str_height, str_gender, tags);
 
             // adds to database
             UserDetailsDatabase.getInstance(getActivity()).UserDetailsDao().insertNewUser(user);
 
-            // output for testing
-            output.setText(user.getFirstName() + " " + user.getLastName() +
-                    " " + user.getDateOfBirth() + "\n" + user.getWeight() +
-                    " " + user.getHeight() + " " + user.getGender() +
-                    " count: " + count);
+            Toast.makeText(getActivity(), "Successfully saved!",
+                    Toast.LENGTH_SHORT).show();
         }
     }
 
