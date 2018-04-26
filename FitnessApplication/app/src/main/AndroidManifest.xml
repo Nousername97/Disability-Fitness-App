@@ -26,12 +26,12 @@
             android:label="@string/app_name">
         </activity>
         <activity android:name=".exersizeTemplate" />
-        <activity android:name=".fitnessAssessment" />
-        <activity android:name=".HeadPage"/>
-        <activity android:name=".lArmPage"/>
-        <activity android:name=".LegsPage"/>
-        <activity android:name=".rArmPage"/>
-        <activity android:name=".TorsoPage"/>
+        <activity android:name=".injuries.fitnessAssessment" />
+        <activity android:name=".injuries.HeadPage"/>
+        <activity android:name=".injuries.lArmPage"/>
+        <activity android:name=".injuries.LegsPage"/>
+        <activity android:name=".injuries.rArmPage"/>
+        <activity android:name=".injuries.TorsoPage"/>
 
 
     </application>

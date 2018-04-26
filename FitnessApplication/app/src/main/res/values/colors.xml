@@ -3,5 +3,6 @@
     <color name="colorPrimary">#FF6347</color>
     <color name="colorPrimaryDark">#FF7F50</color>
     <color name="colorAccent">#FF4500</color>
+    <color name="colorWhite">#ffffff</color>
     <!--<color name="pageBackground">#FF4500</color>-->
 </resources>
