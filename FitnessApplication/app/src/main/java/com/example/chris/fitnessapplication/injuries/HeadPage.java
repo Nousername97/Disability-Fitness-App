@@ -46,7 +46,11 @@ public class HeadPage extends AppCompatActivity{
     }
 
     public void getStrings() {
+<<<<<<< HEAD
         bodyPartStr = "Neck";
+=======
+        bodyPartStr = partSpinner.getSelectedItem().toString();
+>>>>>>> eeb2a1ffbafecf11a0fc3cd7fa4612c8a61fbeaf
         levelStr = levelSpinner.getSelectedItem().toString();
     }
 
