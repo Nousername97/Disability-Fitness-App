@@ -323,22 +323,6 @@ public class HomePage extends Fragment{
 
         for ( ExercisesDetails temp: currentExercise)
         {
-<<<<<<< HEAD
-=======
-            UserDetails dataInput =  UserDetailsDatabase.getInstance(getActivity()).UserDetailsDao().getUserById(2);
-            ArrayList<String> disabilityTagsForUsers = dataInput.getDisabilityTags();
-            ArrayList<String> disabilityTagsForExercises = temp.getDisabilityTags();
-
-            List<String> common = new ArrayList<String>(disabilityTagsForUsers);
-            common.retainAll(disabilityTagsForExercises);
-
-            if(common.isEmpty())
-            {
-                listToBeFilled.add(temp.getName());
-            }
-
-        }
->>>>>>> eeb2a1ffbafecf11a0fc3cd7fa4612c8a61fbeaf
 
             ArrayList<String> disabilityTagsForExercises = temp.getDisabilityTags();
             List<String> common = new ArrayList<String>(disabilityTagsForUsers);
