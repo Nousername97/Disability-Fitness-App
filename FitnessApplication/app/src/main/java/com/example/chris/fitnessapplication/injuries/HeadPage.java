@@ -10,12 +10,19 @@ import android.widget.Spinner;
 
 import com.example.chris.fitnessapplication.MainActivity;
 import com.example.chris.fitnessapplication.R;
+import com.example.chris.fitnessapplication.data.Users.UserDetails;
+import com.example.chris.fitnessapplication.data.Users.UserDetailsDatabase;
+
+import java.util.ArrayList;
 
 
 public class HeadPage extends AppCompatActivity{
 
     private Spinner partSpinner, levelSpinner;
     private Button btnContinue;
+    private String bodyPartStr, levelStr;
+    private ArrayList<String> disabilityTags;
+    UserDetails dataInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +45,27 @@ public class HeadPage extends AppCompatActivity{
         );
     }
 
+    public void getStrings() {
+        bodyPartStr = "Neck";
+        levelStr = levelSpinner.getSelectedItem().toString();
+    }
+
     public void onContinueButtonClick() {
+        getStrings();
         Intent i = new Intent(HeadPage.this, MainActivity.class);
         startActivity(i);
+        UserDetails dataInput =  UserDetailsDatabase.getInstance(this).UserDetailsDao().getUserById(2);
+        disabilityTags = dataInput.getDisabilityTags();
+        disabilityTags.add(bodyPartStr);
+        dataInput.setDisabilityTags(disabilityTags);
+        UserDetailsDatabase.getInstance(this).UserDetailsDao().insertNewUser(dataInput);
+
     }
 
     private void setPartContent() {
         // method for setting content in the body part spinner
         String[] arraySpinner = new String[] {
-                "Neck", "Eyes", "Ears"
+                "Neck"
         };
 
         ArrayAdapter<String> adapter;

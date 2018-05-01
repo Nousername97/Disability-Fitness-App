@@ -24,6 +24,8 @@ import android.support.v4.app.Fragment;
 
 import com.example.chris.fitnessapplication.data.Exercises.ExerciseDetailsDatabase;
 import com.example.chris.fitnessapplication.data.Exercises.ExercisesDetails;
+import com.example.chris.fitnessapplication.data.Users.UserDetails;
+import com.example.chris.fitnessapplication.data.Users.UserDetailsDatabase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -314,12 +316,25 @@ public class HomePage extends Fragment{
 
         List<String> listToBeFilled = new ArrayList<String>();
         List<ExercisesDetails> currentExercise = ExerciseDetailsDatabase.getInstance(getActivity()).exercisesDetailsDao().getExercisesByGroup(group);
+        UserDetails dataInput =  UserDetailsDatabase.getInstance(getActivity()).UserDetailsDao().getUserById(2);
+        ArrayList<String> disabilityTagsForUsers = dataInput.getDisabilityTags();
+
+
 
         for ( ExercisesDetails temp: currentExercise)
         {
-            listToBeFilled.add(temp.getName());
-        }
 
+            ArrayList<String> disabilityTagsForExercises = temp.getDisabilityTags();
+            List<String> common = new ArrayList<String>(disabilityTagsForUsers);
+            common.retainAll(disabilityTagsForExercises);
+
+            if(common.isEmpty())
+            {
+                listToBeFilled.add(temp.getName());
+            }
+
+        }
         return  listToBeFilled;
+
     }
 }
