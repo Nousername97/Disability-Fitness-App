@@ -314,15 +314,17 @@ public class HomePage extends Fragment{
 
         ExerciseDetailsDatabase.getInstance(getActivity()).exercisesDetailsDao().insertNewExercise(new ExercisesDetails("Seated Calf raise using a Machine", "Seated Calf raise using a Machine", R.drawable.seatedcalfraiseusingmachine, "Sit at a calf raise machine, place the balls of your feet on the footpad and place your thighs under the legpad, unlock the bar and slowly raise your toes as far as possible before returning them to the starting position.", "calf", Leg));
 
-        /*List<String> listToBeFilled = new ArrayList<String>();
+        List<String> listToBeFilled = new ArrayList<String>();
         List<ExercisesDetails> currentExercise = ExerciseDetailsDatabase.getInstance(getActivity()).exercisesDetailsDao().getExercisesByGroup(group);
+        UserDetails dataInput =  UserDetailsDatabase.getInstance(getActivity()).UserDetailsDao().getUserById(2);
+        ArrayList<String> disabilityTagsForUsers = dataInput.getDisabilityTags();
+
+
 
         for ( ExercisesDetails temp: currentExercise)
         {
-            UserDetails dataInput =  UserDetailsDatabase.getInstance(getActivity()).UserDetailsDao().getUserById(2);
-            ArrayList<String> disabilityTagsForUsers = dataInput.getDisabilityTags();
-            ArrayList<String> disabilityTagsForExercises = temp.getDisabilityTags();
 
+            ArrayList<String> disabilityTagsForExercises = temp.getDisabilityTags();
             List<String> common = new ArrayList<String>(disabilityTagsForUsers);
             common.retainAll(disabilityTagsForExercises);
 
@@ -332,16 +334,7 @@ public class HomePage extends Fragment{
             }
 
         }
-
-        return  listToBeFilled;*/
-        List<String> listToBeFilled = new ArrayList<String>();
-        List<ExercisesDetails> currentExercise = ExerciseDetailsDatabase.getInstance(getActivity()).exercisesDetailsDao().getExercisesByGroup(group);
-
-        for ( ExercisesDetails temp: currentExercise)
-        {
-            listToBeFilled.add(temp.getName());
-        }
-
         return  listToBeFilled;
+
     }
 }
